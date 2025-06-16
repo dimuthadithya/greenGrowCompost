@@ -43,3 +43,24 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Back to top button
+  var backToTopButton = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', function () {
+    if (window.pageYOffset > 300) {
+      // Show button after scrolling down 300px
+      backToTopButton.style.display = 'flex';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  });
+
+  backToTopButton.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
