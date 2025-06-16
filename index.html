@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GreenGrow Compost - Organic Fertilizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-green-800 text-white shadow-lg sticky top-0 z-50">
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-leaf text-2xl"></i>
+          <span class="text-xl font-bold">GreenGrow</span>
+        </div>
+        <div class="hidden md:flex space-x-6">
+          <a href="#" class="hover:text-green-200 font-medium">Home</a>
+          <a href="#" class="hover:text-green-200">About</a>
+          <a href="#" class="hover:text-green-200">Products</a>
+          <a href="#" class="hover:text-green-200">Gallery</a>
+          <a href="#" class="hover:text-green-200">Contact</a>
+        </div>
+        <div class="md:hidden">
+          <button id="menu-toggle" class="text-white focus:outline-none">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-green-700 px-4 py-2">
+        <a href="#" class="block py-2 hover:text-green-200">Home</a>
+        <a href="#" class="block py-2 hover:text-green-200">About</a>
+        <a href="#" class="block py-2 hover:text-green-200">Products</a>
+        <a href="#" class="block py-2 hover:text-green-200">Gallery</a>
+        <a href="#" class="block py-2 hover:text-green-200">Contact</a>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-white py-20 md:py-32">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          Premium Organic Compost
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+          Natural. Sustainable. Powerful. Transform your garden with our 100%
+          organic compost fertilizer.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="#products"
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+            >Shop Now</a
+          >
+          <a
+            href="#contact"
+            class="bg-white hover:bg-gray-100 text-green-800 font-bold py-3 px-6 rounded-lg transition duration-300"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-green-800">
+          Why Choose Our Compost?
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Feature 1 -->
+          <div
+            class="feature-card bg-gray-50 p-6 rounded-lg shadow-md transition duration-300"
+          >
+            <div class="text-green-600 mb-4">
+              <i class="fas fa-recycle text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-green-800">
+              Organic & Chemical-Free
+            </h3>
+            <p class="text-gray-600">
+              100% natural compost made from biodegradable waste with no harmful
+              chemicals.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div
+            class="feature-card bg-gray-50 p-6 rounded-lg shadow-md transition duration-300"
+          >
+            <div class="text-green-600 mb-4">
+              <i class="fas fa-seedling text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-green-800">
+              Enriches Soil
+            </h3>
+            <p class="text-gray-600">
+              Improves soil structure and provides essential nutrients for
+              healthy plant growth.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div
+            class="feature-card bg-gray-50 p-6 rounded-lg shadow-md transition duration-300"
+          >
+            <div class="text-green-600 mb-4">
+              <i class="fas fa-globe-asia text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-green-800">
+              Eco-Friendly
+            </h3>
+            <p class="text-gray-600">
+              Sustainable solution that reduces waste and helps protect our
+              environment.
+            </p>
+          </div>
+
+          <!-- Feature 4 -->
+          <div
+            class="feature-card bg-gray-50 p-6 rounded-lg shadow-md transition duration-300"
+          >
+            <div class="text-green-600 mb-4">
+              <i class="fas fa-chart-line text-4xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-green-800">
+              Boosts Yield
+            </h3>
+            <p class="text-gray-600">
+              Increases crop productivity and improves the quality of your
+              harvest.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-green-800">
+          Our Premium Compost
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div
+            class="product-card bg-white rounded-lg overflow-hidden shadow-md relative"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              alt="Compost Bag"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-green-800">
+                25kg Premium Compost
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Perfect for small gardens and potted plants.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-green-700">Rs. 1,200</span>
+                <button
+                  class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <div
+              class="product-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            >
+              <button
+                class="bg-white text-green-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300"
+              >
+                Quick View
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="product-card bg-white rounded-lg overflow-hidden shadow-md relative"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+              alt="Compost Bag"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-green-800">
+                50kg Premium Compost
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Ideal for medium-sized gardens and farms.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-green-700">Rs. 2,200</span>
+                <button
+                  class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+            <div
+              class="product-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            >
+              <button
+                class="bg-white text-green-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300"
+              >
+                Quick View
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="product-card bg-white rounded-lg overflow-hidden shadow-md relative"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+              alt="Compost Bag"
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2 text-green-800">
+                Bulk Order (100kg+)
+              </h3>
+              <p class="text-gray-600 mb-4">
+                For large farms and commercial agriculture.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-2xl font-bold text-green-700">Rs. 4,000</span>
+                <button
+                  class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300"
+                >
+                  Contact Us
+                </button>
+              </div>
+            </div>
+            <div
+              class="product-overlay absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            >
+              <button
+                class="bg-white text-green-800 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition duration-300"
+              >
+                Quick View
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300"
+          >
+            View All Products
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-green-800">
+          Our Compost in Action
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="overflow-hidden rounded-lg shadow-md">
+            <img
+              src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+              alt="Fresh Compost"
+              class="w-full h-64 object-cover hover:scale-105 transition duration-300"
+            />
+            <div class="p-4 bg-gray-50">
+              <p class="text-center font-medium text-green-800">
+                Fresh Compost
+              </p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-lg shadow-md">
+            <img
+              src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              alt="Packaged Bags"
+              class="w-full h-64 object-cover hover:scale-105 transition duration-300"
+            />
+            <div class="p-4 bg-gray-50">
+              <p class="text-center font-medium text-green-800">
+                Packaged Bags
+              </p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-lg shadow-md">
+            <img
+              src="https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
+              alt="Garden Application"
+              class="w-full h-64 object-cover hover:scale-105 transition duration-300"
+            />
+            <div class="p-4 bg-gray-50">
+              <p class="text-center font-medium text-green-800">
+                Garden Application
+              </p>
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-lg shadow-md">
+            <img
+              src="https://images.unsplash.com/photo-1605001017150-85d6b92eefb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              alt="Healthy Plants"
+              class="w-full h-64 object-cover hover:scale-105 transition duration-300"
+            />
+            <div class="p-4 bg-gray-50">
+              <p class="text-center font-medium text-green-800">
+                Healthy Plants
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-green-800">
+          What Our Customers Say
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"
+              >
+                <i class="fas fa-user text-green-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h4 class="font-semibold">Nimal Perera</h4>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-600">
+              "My vegetable garden has never been more productive! The compost
+              is rich and full of nutrients. Highly recommended!"
+            </p>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"
+              >
+                <i class="fas fa-user text-green-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h4 class="font-semibold">Kamala Fernando</h4>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-600">
+              "I've been using GreenGrow compost for my flower garden and the
+              results are amazing. The flowers are more vibrant and last
+              longer."
+            </p>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center"
+              >
+                <i class="fas fa-user text-green-600 text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h4 class="font-semibold">Sunil Rathnayake</h4>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-600">
+              "As a small-scale farmer, I've seen a 30% increase in my yield
+              since switching to GreenGrow compost. The delivery was prompt
+              too!"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row items-center">
+          <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-12">
+            <h2 class="text-3xl font-bold mb-6 text-green-800">
+              About GreenGrow
+            </h2>
+            <p class="text-gray-600 mb-4">
+              We are a Sri Lankan eco-conscious team committed to turning
+              organic waste into rich, effective compost. Our mission is to
+              provide farmers and gardeners with high-quality organic fertilizer
+              while reducing environmental waste.
+            </p>
+            <p class="text-gray-600 mb-6">
+              Our compost is carefully processed to ensure it's free from
+              harmful chemicals and packed with nutrients that plants love. We
+              believe in sustainable agriculture that works in harmony with
+              nature.
+            </p>
+            <a
+              href="#"
+              class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+            >
+              Learn More About Us
+            </a>
+          </div>
+          <div class="lg:w-1/2">
+            <img
+              src="https://images.unsplash.com/photo-1605001017150-85d6b92eefb6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+              alt="About GreenGrow"
+              class="w-full rounded-lg shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-green-700 text-white">
+      <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Garden?</h2>
+        <p class="text-xl mb-8 max-w-2xl mx-auto">
+          Join hundreds of satisfied customers who have experienced the
+          GreenGrow difference.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href="#products"
+            class="bg-white hover:bg-gray-100 text-green-800 font-bold py-3 px-8 rounded-lg transition duration-300"
+            >Shop Now</a
+          >
+          <a
+            href="#contact"
+            class="bg-transparent hover:bg-green-800 border-2 border-white text-white font-bold py-3 px-8 rounded-lg transition duration-300"
+            >Contact Us</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12 text-green-800">
+          Get In Touch
+        </h2>
+        <div class="flex flex-col lg:flex-row gap-12">
+          <div class="lg:w-1/2">
+            <h3 class="text-xl font-semibold mb-4 text-green-700">
+              Contact Information
+            </h3>
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <i class="fas fa-map-marker-alt text-green-600 mt-1 mr-4"></i>
+                <div>
+                  <h4 class="font-medium">Address</h4>
+                  <p class="text-gray-600">
+                    123 Green Street, Colombo, Sri Lanka
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i class="fas fa-phone-alt text-green-600 mt-1 mr-4"></i>
+                <div>
+                  <h4 class="font-medium">Phone</h4>
+                  <p class="text-gray-600">+94 77 123 4567</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i class="fas fa-envelope text-green-600 mt-1 mr-4"></i>
+                <div>
+                  <h4 class="font-medium">Email</h4>
+                  <p class="text-gray-600">info@greengrow.lk</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i class="fas fa-clock text-green-600 mt-1 mr-4"></i>
+                <div>
+                  <h4 class="font-medium">Business Hours</h4>
+                  <p class="text-gray-600">
+                    Monday - Saturday: 8:00 AM - 6:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mt-8 mb-4 text-green-700">
+              Follow Us
+            </h3>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition duration-300"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition duration-300"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition duration-300"
+              >
+                <i class="fab fa-whatsapp"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center hover:bg-green-700 transition duration-300"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="lg:w-1/2">
+            <h3 class="text-xl font-semibold mb-4 text-green-700">
+              Send Us a Message
+            </h3>
+            <form class="space-y-4">
+              <div>
+                <label for="name" class="block text-gray-700 mb-1">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+              <div>
+                <label for="email" class="block text-gray-700 mb-1"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+              <div>
+                <label for="phone" class="block text-gray-700 mb-1"
+                  >Phone</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+              <div>
+                <label for="message" class="block text-gray-700 mb-1"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 w-full"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <div class="flex items-center space-x-2">
+              <i class="fas fa-leaf text-2xl"></i>
+              <span class="text-xl font-bold">GreenGrow</span>
+            </div>
+            <p class="mt-2 text-green-200">Natural. Sustainable. Powerful.</p>
+          </div>
+          <div
+            class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center sm:text-left"
+          >
+            <a href="#" class="hover:text-green-300">Privacy Policy</a>
+            <a href="#" class="hover:text-green-300">Terms of Service</a>
+            <a href="#" class="hover:text-green-300">Shipping Policy</a>
+            <a href="#" class="hover:text-green-300">FAQ</a>
+          </div>
+        </div>
+        <div
+          class="border-t border-green-800 mt-6 pt-6 text-center text-green-300"
+        >
+          <p>&copy; 2023 GreenGrow Compost. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button
+      id="back-to-top"
+      class="fixed bottom-8 right-8 bg-green-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-green-700 transition duration-300 hidden"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="./assets/js/index.js"></script>
+  </body>
+</html>
