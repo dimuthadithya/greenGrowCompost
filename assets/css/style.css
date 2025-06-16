@@ -600,3 +600,49 @@ address {
         margin: 0 -1rem;
     }
 }
+
+/* Cart Quantity Controls */
+.quantity-control {
+    border-radius: 0.375rem;
+}
+
+.quantity-control .btn {
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+.quantity-input {
+    height: 32px;
+    font-weight: 600;
+    background-color: #fff !important;
+    border-color: #dee2e6;
+    appearance: textfield;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Cart item layout */
+.cart-item-image {
+    max-width: 100px;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .quantity-control {
+        justify-content: flex-start;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
