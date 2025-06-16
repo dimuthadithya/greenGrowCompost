@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart - GreenGrow Compost</title>
+    <!-- Bootstrap 5 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-leaf me-2"></i>GreenGrow
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="profile.html">
+                <i class="fas fa-user-circle me-1"></i>Profile
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="cart.html">
+                <i class="fas fa-shopping-cart me-1"></i>Cart
+                <span class="badge bg-light text-success">3</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="py-5 bg-light mt-5">
+      <div class="container py-4">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <a href="index.html" class="text-decoration-none">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Shopping Cart
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row">
+          <!-- Cart Items -->
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                <h4 class="mb-4">Shopping Cart (3 items)</h4>
+
+                <!-- Cart Item -->
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-2">
+                    <img
+                      src="assets/images/product1.jpg"
+                      alt="Premium Compost"
+                      class="img-fluid rounded"
+                    />
+                  </div>
+                  <div class="col-md-5">
+                    <h5 class="mb-2">Premium Garden Compost</h5>
+                    <p class="text-muted mb-0">20kg bag</p>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="quantity-control d-flex align-items-center">
+                      <button
+                        class="btn btn-sm btn-outline-secondary px-2 me-2"
+                        type="button"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm text-center quantity-input"
+                        value="2"
+                        min="1"
+                        style="width: 45px"
+                        readonly
+                      />
+                      <button
+                        class="btn btn-sm btn-outline-secondary px-2 ms-2"
+                        type="button"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="fw-bold">$29.98</span>
+                  </div>
+                  <div class="col-md-1 text-end">
+                    <button class="btn btn-link text-danger p-0">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Cart Item -->
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-2">
+                    <img
+                      src="assets/images/product2.jpg"
+                      alt="Organic Fertilizer"
+                      class="img-fluid rounded"
+                    />
+                  </div>
+                  <div class="col-md-5">
+                    <h5 class="mb-2">Organic Plant Fertilizer</h5>
+                    <p class="text-muted mb-0">5kg bag</p>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="quantity-control d-flex align-items-center">
+                      <button
+                        class="btn btn-sm btn-outline-secondary px-2 me-2"
+                        type="button"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm text-center quantity-input"
+                        value="1"
+                        min="1"
+                        style="width: 45px"
+                        readonly
+                      />
+                      <button
+                        class="btn btn-sm btn-outline-secondary px-2 ms-2"
+                        type="button"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="fw-bold">$12.99</span>
+                  </div>
+                  <div class="col-md-1 text-end">
+                    <button class="btn btn-link text-danger p-0">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Cart Item -->
+                <div class="row mb-4 align-items-center">
+                  <div class="col-md-2">
+                    <img
+                      src="assets/images/product3.jpg"
+                      alt="Soil Enhancer"
+                      class="img-fluid rounded"
+                    />
+                  </div>
+                  <div class="col-md-5">
+                    <h5 class="mb-2">Natural Soil Enhancer</h5>
+                    <p class="text-muted mb-0">10kg bag</p>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="quantity-control d-flex align-items-center">
+                      <button
+                        class="btn btn-sm btn-outline-secondary px-2 me-2"
+                        type="button"
+                      >
+                        -
+                      </button>
+                      <input
+                        type="text"
+                        class="form-control form-control-sm text-center quantity-input"
+                        value="1"
+                        min="1"
+                        style="width: 45px"
+                        readonly
+                      />
+                      <button
+                        class="btn btn-sm btn-outline-secondary px-2 ms-2"
+                        type="button"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <span class="fw-bold">$19.99</span>
+                  </div>
+                  <div class="col-md-1 text-end">
+                    <button class="btn btn-link text-danger p-0">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Cart Actions -->
+                <div
+                  class="d-flex justify-content-between align-items-center mt-4"
+                >
+                  <a href="products.html" class="btn btn-outline-success">
+                    <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+                  </a>
+                  <button class="btn btn-outline-danger">
+                    <i class="fas fa-trash-alt me-2"></i>Clear Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Summary -->
+          <div class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                <h4 class="mb-4">Order Summary</h4>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Subtotal</span>
+                  <span class="fw-bold">$62.96</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Shipping</span>
+                  <span class="fw-bold">$5.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-3">
+                  <span>Tax (10%)</span>
+                  <span class="fw-bold">$6.30</span>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between mb-4">
+                  <span class="fw-bold">Total</span>
+                  <span class="fw-bold text-success h4 mb-0">$74.26</span>
+                </div>
+
+                <!-- Promo Code -->
+                <div class="mb-4">
+                  <label class="form-label">Promo Code</label>
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter code"
+                    />
+                    <button class="btn btn-success" type="button">Apply</button>
+                  </div>
+                </div>
+
+                <!-- Checkout Button -->
+                <button class="btn btn-success w-100 mb-3">
+                  <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                </button>
+
+                <!-- Payment Methods -->
+                <div class="text-center mt-3">
+                  <small class="text-muted">We Accept:</small>
+                  <div class="mt-2">
+                    <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
+                    <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
+                    <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
+                    <i class="fab fa-cc-paypal fa-2x text-muted"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button
+      type="button"
+      class="btn btn-success btn-floating btn-lg"
+      id="btn-back-to-top"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
