@@ -510,6 +510,85 @@ address {
     line-height: 1.8;
 }
 
+/* Tracking Page Styles */
+.tracking-timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.tracking-timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 15px;
+    height: 100%;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.tracking-item {
+    position: relative;
+    padding-left: 45px;
+    padding-bottom: 30px;
+}
+
+.tracking-item:last-child {
+    padding-bottom: 0;
+}
+
+.tracking-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+    z-index: 1;
+}
+
+.tracking-item.completed .tracking-icon {
+    background: var(--bs-success);
+    color: white;
+}
+
+.tracking-item.active .tracking-icon {
+    background: var(--bs-success);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(25, 135, 84, 0.25);
+}
+
+.tracking-content {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.tracking-item.active .tracking-content {
+    border-left: 3px solid var(--bs-success);
+}
+
+/* Invoice Styles */
+@media print {
+    .invoice-actions {
+        display: none;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .container {
+        max-width: 100% !important;
+    }
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .profile-image {
