@@ -22,21 +22,34 @@
 /* Product Cards */
 .product-card {
     transition: all 0.3s ease-in-out;
+    overflow: hidden;
 }
 
 .product-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    height: 250px;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
 }
 
 .product-badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background-color: var(--bs-success);
+    background: var(--bs-success);
     color: white;
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: bold;
+    border-radius: 2rem;
+    font-weight: 600;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2);
 }
 
 /* Gallery Items */
@@ -239,4 +252,98 @@
 
 .product-image:hover img {
     transform: scale(1.05);
+}
+
+/* Products Page */
+.product-card {
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+}
+
+.product-card img {
+    height: 250px;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
+.product-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--bs-success);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    z-index: 1;
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.2);
+}
+
+/* Product Filters */
+.btn-outline-success {
+    border-width: 2px;
+    font-weight: 500;
+}
+
+.btn-outline-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 135, 84, 0.15);
+}
+
+/* Search Input */
+.input-group {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.input-group .form-control {
+    border: none;
+    padding: 0.75rem 1.25rem;
+}
+
+.input-group .form-control:focus {
+    box-shadow: none;
+}
+
+.input-group .btn {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Pagination */
+.pagination {
+    gap: 0.5rem;
+}
+
+.pagination .page-link {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    color: var(--bs-success);
+    font-weight: 500;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--bs-success);
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #e8f5e9;
+    color: var(--bs-success);
+    transform: translateY(-2px);
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: transparent;
+    color: #6c757d;
 }
