@@ -21,62 +21,14 @@
     />
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet" />
-    <style>
-      .product-image {
-        background: #fff;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-
-      .best-seller-badge {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        background: #ff6b6b;
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
-        z-index: 1;
-      }
-
-      .stock-badge {
-        background: #e8f5e9;
-        color: var(--primary-green);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        font-weight: 600;
-      }
-
-      .price-section {
-        background: #f8f9fa;
-        border-radius: 15px;
-        padding: 2rem;
-      }
-
-      .feature-badge {
-        background: linear-gradient(
-          45deg,
-          var(--primary-green),
-          var(--secondary-green)
-        );
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        margin: 0.5rem;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      }
-    </style>
   </head>
   <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="index.html">🌱 GreenGrow</a>
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-leaf me-2"></i>GreenGrow
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -109,9 +61,13 @@
       <div class="container">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
             <li class="breadcrumb-item">
-              <a href="index.html#products">Products</a>
+              <a href="index.html" class="text-decoration-none">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="index.html#products" class="text-decoration-none"
+                >Products</a
+              >
             </li>
             <li class="breadcrumb-item active">Veggie Pro Compost</li>
           </ol>
@@ -125,22 +81,22 @@
                 <i class="fas fa-award me-1"></i>Best Seller
               </span>
               <img
-                src="assets/images/product-main.jpg"
+                src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
                 alt="Veggie Pro Compost"
-                class="img-fluid"
+                class="img-fluid rounded-3"
               />
             </div>
           </div>
 
           <!-- Product Info -->
           <div class="col-md-6">
-            <h1 class="mb-3">Veggie Pro Compost</h1>
+            <h1 class="display-5 mb-3">Veggie Pro Compost</h1>
             <div class="stock-badge mb-3">
               <i class="fas fa-check me-1"></i>In Stock
             </div>
 
             <div class="price-section mb-4">
-              <h2 class="text-primary mb-3">Rs. [Price]/Bag</h2>
+              <h2 class="text-success mb-3">Rs. 1,200/Bag</h2>
               <p class="mb-2">Available in:</p>
               <div class="btn-group mb-3" role="group">
                 <input
@@ -167,10 +123,10 @@
                 >
               </div>
               <div class="d-grid gap-2">
-                <button class="btn btn-primary btn-lg">
+                <button class="btn btn-success btn-lg">
                   <i class="fas fa-shopping-cart me-2"></i>Add to Cart
                 </button>
-                <button class="btn btn-outline-primary">
+                <button class="btn btn-outline-success">
                   <i class="fas fa-phone me-2"></i>Contact for Bulk Orders
                 </button>
               </div>
@@ -178,55 +134,57 @@
 
             <div class="product-features mb-4">
               <h4 class="mb-3">Key Features:</h4>
-              <div class="d-flex flex-wrap">
-                <div class="feature-badge">
+              <div class="d-flex flex-wrap gap-2">
+                <span class="feature-badge">
                   <i class="fas fa-seedling"></i>
                   <span>Organic</span>
-                </div>
-                <div class="feature-badge">
+                </span>
+                <span class="feature-badge">
                   <i class="fas fa-leaf"></i>
                   <span>Peat Free</span>
-                </div>
-                <div class="feature-badge">
+                </span>
+                <span class="feature-badge">
                   <i class="fas fa-recycle"></i>
                   <span>Sustainable</span>
-                </div>
-                <div class="feature-badge">
+                </span>
+                <span class="feature-badge">
                   <i class="fas fa-check-circle"></i>
                   <span>Professional Grade</span>
-                </div>
+                </span>
               </div>
             </div>
 
             <div class="product-description">
-              <h4>Product Description</h4>
-              <p>
+              <h4 class="text-success">Product Description</h4>
+              <p class="lead">
                 A professional grade loam-based soil enriched with organic
                 compost. The perfect choice for the discerning gardener building
                 vegetable patches and raised beds.
               </p>
 
-              <h5 class="mt-4">Benefits include:</h5>
+              <h5 class="text-success mt-4">Benefits include:</h5>
               <ul class="list-unstyled">
-                <li>
-                  <i class="fas fa-check text-success me-2"></i>Ideal for
-                  filling vegetable patches or raised beds
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>
+                  Ideal for filling vegetable patches or raised beds
                 </li>
-                <li>
-                  <i class="fas fa-check text-success me-2"></i>Contains high
-                  organic matter content with naturally slow-releasing nutrients
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>
+                  Contains high organic matter content with naturally
+                  slow-releasing nutrients
                 </li>
-                <li>
-                  <i class="fas fa-check text-success me-2"></i>Well-structured
-                  to allow air circulation, drainage and root development
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>
+                  Well-structured to allow air circulation, drainage and root
+                  development
                 </li>
-                <li>
-                  <i class="fas fa-check text-success me-2"></i>Rich in natural
-                  fibres as this blended with our compost
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>
+                  Rich in natural fibres as this blended with our compost
                 </li>
-                <li>
-                  <i class="fas fa-check text-success me-2"></i>Will continue to
-                  improve over time
+                <li class="mb-2">
+                  <i class="fas fa-check text-success me-2"></i>
+                  Will continue to improve over time
                 </li>
               </ul>
             </div>
@@ -236,34 +194,42 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-green-900 text-white py-8">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center">
-          <div class="mb-4 md:mb-0">
-            <div class="flex items-center space-x-2">
-              <i class="fas fa-leaf text-2xl"></i>
-              <span class="text-xl font-bold">GreenGrow</span>
+    <footer class="bg-dark text-white py-5 mt-5">
+      <div class="container">
+        <div class="row align-items-center mb-4">
+          <div class="col-md-6 mb-4 mb-md-0">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <i class="fas fa-leaf fs-4"></i>
+              <span class="h4 mb-0 fw-bold">GreenGrow</span>
             </div>
-            <p class="mt-2 text-green-200">Natural. Sustainable. Powerful.</p>
+            <p class="text-muted mb-0">Natural. Sustainable. Powerful.</p>
           </div>
-          <div
-            class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6 text-center sm:text-left"
-          >
-            <a href="#" class="hover:text-green-300">Privacy Policy</a>
-            <a href="#" class="hover:text-green-300">Terms of Service</a>
-            <a href="#" class="hover:text-green-300">Shipping Policy</a>
-            <a href="#" class="hover:text-green-300">FAQ</a>
+          <div class="col-md-6">
+            <div
+              class="d-flex flex-column flex-sm-row justify-content-md-end gap-3 text-center text-sm-start"
+            >
+              <a href="#" class="text-decoration-none link-light"
+                >Privacy Policy</a
+              >
+              <a href="#" class="text-decoration-none link-light"
+                >Terms of Service</a
+              >
+              <a href="#" class="text-decoration-none link-light"
+                >Shipping Policy</a
+              >
+              <a href="#" class="text-decoration-none link-light">FAQ</a>
+            </div>
           </div>
         </div>
-        <div
-          class="border-t border-green-800 mt-6 pt-6 text-center text-green-300"
-        >
-          <p>&copy; 2023 GreenGrow Compost. All rights reserved.</p>
+        <div class="border-top border-secondary pt-4 text-center text-muted">
+          <p class="mb-0">
+            &copy; 2023 GreenGrow Compost. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
-    <!-- Bootstrap 5 JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap 5 JS Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
