@@ -46,12 +46,6 @@ Route::get('/order/{id}', function ($id) {
 
 
 // Authentication & Profile Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
-
 
 // Profile Routes
 Route::middleware('auth')->group(function () {
