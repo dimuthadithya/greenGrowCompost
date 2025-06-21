@@ -33,6 +33,27 @@ class ProductController extends Controller
      * Store a newly created product in storage.
      */    public function store(Request $request)
     {
+        $messages = [
+            'name.required' => 'The product name is required',
+            'name.max' => 'The product name cannot be longer than 255 characters',
+            'description.required' => 'The product description is required',
+            'price.required' => 'The product price is required',
+            'price.numeric' => 'The price must be a valid number',
+            'price.min' => 'The price cannot be negative',
+            'stock_quantity.required' => 'The stock quantity is required',
+            'stock_quantity.integer' => 'The stock quantity must be a whole number',
+            'stock_quantity.min' => 'The stock quantity cannot be negative',
+            'weight.required' => 'The product weight is required',
+            'weight.numeric' => 'The weight must be a valid number',
+            'weight.min' => 'The weight cannot be negative',
+            'unit.required' => 'Please select a unit of measurement',
+            'unit.in' => 'Please select a valid unit (kg, g, lb, or oz)',
+            'category_id.required' => 'Please select a product category',
+            'category_id.exists' => 'The selected category is invalid',
+            'image.image' => 'The file must be an image',
+            'image.max' => 'The image size cannot exceed 2MB'
+        ];
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -44,21 +65,27 @@ class ProductController extends Controller
             'image' => 'nullable|image|max:2048',
             'is_featured' => 'boolean',
             'is_active' => 'boolean'
-        ]);
-        $validated['slug'] = Str::slug($validated['name']);
+        ], $messages);
 
-        // Set boolean fields
-        $validated['is_featured'] = $request->boolean('is_featured', false);
-        $validated['is_active'] = $request->boolean('is_active', true);
+        try {
+            $validated['slug'] = Str::slug($validated['name']);
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('products', 'public');
+            // Set boolean fields
+            $validated['is_featured'] = $request->boolean('is_featured', false);
+            $validated['is_active'] = $request->boolean('is_active', true);
+
+            if ($request->hasFile('image')) {
+                $validated['image'] = $request->file('image')->store('products', 'public');
+            }
+
+            Product::create($validated);
+
+            return redirect()->route('admin.products.index')
+                ->with('success', 'Product created successfully.');
+        } catch (\Exception $e) {
+            return back()->withInput()
+                ->with('error', 'There was an error creating the product. Please try again.');
         }
-
-        Product::create($validated);
-
-        return redirect()->route('admin.products.index')
-            ->with('success', 'Product created successfully.');
     }
 
     /**
