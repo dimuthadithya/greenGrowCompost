@@ -60,11 +60,23 @@
 }
 
 .stock-badge {
-  background: #e8f5e9;
-  color: var(--primary-green);
+  display: inline-block;
   padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  background-color: #f8f9fa;
+}
+
+.stock-badge i {
+  font-size: 0.9em;
+}
+
+.stock-badge .text-success {
+  color: #198754;
+}
+
+.stock-badge .text-danger {
+  color: #dc3545;
 }
 
 .price-section {
@@ -79,4 +91,25 @@
 
 #mainProductImage:hover {
   transform: scale(1.05);
+}
+
+.quantity-control {
+  max-width: 200px;
+}
+
+.quantity-control input[type="number"] {    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.quantity-control input[type="number"]::-webkit-outer-spin-button,
+.quantity-control input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.quantity-control .btn {
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
 }
