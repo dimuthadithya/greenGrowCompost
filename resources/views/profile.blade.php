@@ -482,7 +482,7 @@
                     class="btn-close"
                     data-bs-dismiss="modal"></button>
             </div>
-            <form action="{{ route('addresses.update', '') }}" method="POST" id="editAddressForm">
+            <form action="{{ route('addresses.update', 0) }}" method="POST" id="editAddressForm">
                 @csrf
                 @method('patch')
                 <div class="modal-body">
@@ -546,6 +546,7 @@
                         Save Changes
                     </button>
                 </div>
+            </form>
         </div>
     </div>
 </div>
@@ -641,7 +642,7 @@
                 const form = document.getElementById('editAddressForm');
 
                 // Update form action URL
-                form.action = form.action + '/' + addressId;
+                form.action = form.action.replace('/0', '/' + addressId);
 
                 // Set form values
                 form.querySelector('[name="label"]').value = this.dataset.label;
