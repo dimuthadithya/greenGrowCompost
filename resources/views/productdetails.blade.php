@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'GreenGrow Compost - Organic Fertilizer')
+@section('title', $product->name . ' - GreenGrow Compost')
 
 @section('content')
 <!-- Product Details Section -->
@@ -8,12 +8,12 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html" class="text-decoration-none">Home</a>
+                    <a href="{{ route('home') }}" class="text-decoration-none">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="index.html#products" class="text-decoration-none">Products</a>
+                    <a href="{{ route('products.index') }}" class="text-decoration-none">Products</a>
                 </li>
-                <li class="breadcrumb-item active">Veggie Pro Compost</li>
+                <li class="breadcrumb-item active">{{ $product->name }}</li>
             </ol>
         </nav>
 
@@ -21,25 +21,27 @@
             <!-- Product Image -->
             <div class="col-md-6">
                 <div class="product-image mb-3">
+                    @if($product->is_featured)
                     <span class="best-seller-badge">
                         <i class="fas fa-award me-1"></i>Best Seller
                     </span>
+                    @endif
                     <img
-                        src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
-                        alt="Veggie Pro Compost"
+                        src="{{ $product->image_url ?? 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80' }}"
+                        alt="{{ $product->name }}"
                         class="img-fluid rounded-3" />
                 </div>
             </div>
 
             <!-- Product Info -->
             <div class="col-md-6">
-                <h1 class="display-5 mb-3">Veggie Pro Compost</h1>
+                <h1 class="display-5 mb-3">{{ $product->name }}</h1>
                 <div class="stock-badge mb-3">
                     <i class="fas fa-check me-1"></i>In Stock
                 </div>
 
                 <div class="price-section mb-4">
-                    <h2 class="text-success mb-3">Rs. 1,200/Bag</h2>
+                    <h2 class="text-success mb-3">Rs. {{ number_format($product->price) }}/Bag</h2>
                     <p class="mb-2">Available in:</p>
                     <div class="btn-group mb-3" role="group">
                         <input
@@ -94,9 +96,7 @@
                 <div class="product-description">
                     <h4 class="text-success">Product Description</h4>
                     <p class="lead">
-                        A professional grade loam-based soil enriched with organic
-                        compost. The perfect choice for the discerning gardener building
-                        vegetable patches and raised beds.
+                        {{ $product->description }}
                     </p>
 
                     <h5 class="text-success mt-4">Benefits include:</h5>
