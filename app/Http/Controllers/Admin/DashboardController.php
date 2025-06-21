@@ -30,10 +30,19 @@ class DashboardController extends Controller
             ->count();
 
         $newProducts = Product::whereMonth('created_at', now())
-            ->count();        // Get recent orders
+            ->count();
+
+        // Get recent orders with eager loading
         $recentOrders = Order::with(['user', 'items.product'])
             ->latest()
             ->take(10)
+            ->get();
+
+        // Get low stock products
+        $lowStockProducts = Product::with('category')
+            ->where('stock_quantity', '<=', 10)
+            ->orderBy('stock_quantity')
+            ->take(5)
             ->get();
 
         return view('admin.dashboard', compact(
@@ -45,7 +54,8 @@ class DashboardController extends Controller
             'revenueIncrease',
             'newCustomers',
             'newProducts',
-            'recentOrders'
+            'recentOrders',
+            'lowStockProducts'
         ));
     }
 }
