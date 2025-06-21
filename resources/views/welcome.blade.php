@@ -32,9 +32,13 @@
         <div class="text-center">
             <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Products</h2>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            @foreach($featuredProducts as $product)
-            <x-product-card :product="$product" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> @foreach($featuredProducts as $product)
+            <x-product-card
+                :title="$product->name"
+                :price="number_format($product->price, 2)"
+                :image="$product->image ?? 'images/default-product.jpg'"
+                :description="$product->description"
+                :product-id="$product->id" />
             @endforeach
         </div>
         <div class="text-center mt-8">
