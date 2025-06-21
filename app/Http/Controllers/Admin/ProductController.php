@@ -31,19 +31,25 @@ class ProductController extends Controller
 
     /**
      * Store a newly created product in storage.
-     */
-    public function store(Request $request)
+     */    public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
+            'stock_quantity' => 'required|integer|min:0',
+            'weight' => 'required|numeric|min:0',
+            'unit' => 'required|string|in:kg,g,lb,oz',
             'category_id' => 'required|exists:product_categories,id',
-            'image' => 'nullable|image|max:2048'
+            'image' => 'nullable|image|max:2048',
+            'is_featured' => 'boolean',
+            'is_active' => 'boolean'
         ]);
-
         $validated['slug'] = Str::slug($validated['name']);
+
+        // Set boolean fields
+        $validated['is_featured'] = $request->boolean('is_featured', false);
+        $validated['is_active'] = $request->boolean('is_active', true);
 
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('products', 'public');

@@ -15,7 +15,8 @@ class ProductSeeder extends Seeder
         $toolsCategoryId = ProductCategory::where('slug', 'garden-tools')->first()->id;
         $binsCategoryId = ProductCategory::where('slug', 'composting-bins')->first()->id;
         $amendmentsCategoryId = ProductCategory::where('slug', 'soil-amendments')->first()->id;
-        $products = [            [
+        $products = [
+            [
                 'name' => 'Premium Organic Compost',
                 'slug' => Str::slug('Premium Organic Compost'),
                 'description' => 'Our finest organic compost blend, perfect for all gardening needs',
