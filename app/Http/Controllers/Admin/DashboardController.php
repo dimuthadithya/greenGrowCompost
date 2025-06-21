@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         // Get statistics
         $totalOrders = Order::count();
-        $totalRevenue = Order::sum('total_amount');
+        $totalRevenue = Order::sum('total');
         $totalCustomers = User::where('role', 'customer')->count();
         $totalProducts = Product::count();
 
@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $lastMonthOrders = Order::whereMonth('created_at', now()->subMonth())->count();
         $orderIncrease = $lastMonthOrders > 0 ? round(($totalOrders - $lastMonthOrders) / $lastMonthOrders * 100) : 0;
 
-        $lastMonthRevenue = Order::whereMonth('created_at', now()->subMonth())->sum('total_amount');
+        $lastMonthRevenue = Order::whereMonth('created_at', now()->subMonth())->sum('total');
         $revenueIncrease = $lastMonthRevenue > 0 ? round(($totalRevenue - $lastMonthRevenue) / $lastMonthRevenue * 100) : 0;
 
         $newCustomers = User::where('role', 'customer')
