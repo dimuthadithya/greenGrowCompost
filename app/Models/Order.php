@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'user_id',
         'address_id',
@@ -18,8 +18,7 @@ class Order extends Model
         'subtotal',
         'tax',
         'shipping',
-        'total',
-        'order_number'
+        'total'
     ];
 
     protected $casts = [
@@ -29,34 +28,12 @@ class Order extends Model
         'total' => 'decimal:2'
     ];
 
-    public static function generateUniqueOrderNumber()
+    protected $appends = ['order_number'];
+
+    public function getOrderNumberAttribute()
     {
-        return DB::transaction(function () {
-            // Lock the sequence record for update
-            $sequence = DB::table('order_sequences')
-                ->lockForUpdate()
-                ->first();
-
-            if (!$sequence) {
-                throw new \RuntimeException('Order sequence not initialized');
-            }
-
-            // Get and increment the next value
-            $nextValue = $sequence->next_value;
-
-            DB::table('order_sequences')
-                ->where('id', $sequence->id)
-                ->update([
-                    'next_value' => $nextValue + 1,
-                    'updated_at' => now()
-                ]);
-
-            // Format and return the order number
-            return 'GGC' . str_pad($nextValue, 8, '0', STR_PAD_LEFT);
-        });
+        return 'GGC' . str_pad($this->id, 8, '0', STR_PAD_LEFT);
     }
-
-    // Boot has been removed as it's not needed anymore since we're handling order numbers explicitly
 
     /**
      * Get the user that owns the order.
@@ -142,21 +119,5 @@ class Order extends Model
             'cancelled' => 'danger',
             default => 'secondary',
         };
-    }
-
-    public static function createOrder(array $attributes)
-    {
-        return DB::transaction(function () use ($attributes) {
-            // Generate the order number first
-            $sequence = DB::table('order_sequences')->insertGetId([
-                'created_at' => now(),
-                'updated_at' => now()
-            ]);
-
-            $attributes['order_number'] = 'GGC' . str_pad($sequence, 8, '0', STR_PAD_LEFT);
-
-            // Create the order with the generated number
-            return static::create($attributes);
-        });
     }
 }

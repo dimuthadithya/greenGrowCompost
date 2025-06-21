@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class OrderSeeder extends Seeder
 {
-    private $orderCounter = 1;
-
     public function run(): void
     {
         // Clear the orders table first to ensure clean state
@@ -50,15 +48,11 @@ class OrderSeeder extends Seeder
             $subtotal = 0;
             $shipping = 5.00; // Fixed shipping cost
 
-            // Generate unique order number
-            $orderNumber = 'GGC' . str_pad($this->orderCounter++, 8, '0', STR_PAD_LEFT);
-
             // Create the order first with initial values
             $order = Order::create([
                 'user_id' => $user->id,
                 'address_id' => $address->id,
                 'status' => $status,
-                'order_number' => $orderNumber,
                 'subtotal' => 0,
                 'tax' => 0,
                 'shipping' => $shipping,
