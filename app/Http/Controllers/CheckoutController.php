@@ -100,15 +100,17 @@ class CheckoutController extends Controller
                 'tax' => $tax,
                 'shipping' => $shipping,
                 'status' => 'pending',
-            ]);            // Create order items and validate stock
+            ]);
+
+            // Create order items and validate stock
             foreach ($cart as $id => $item) {
                 $product = \App\Models\Product::find($id);
                 if (!$product) {
-                    throw new \Exception("Product not found");
+                    throw new \Exception("Product not found: {$id}");
                 }
 
                 if ($product->stock_quantity < $item['quantity']) {
-                    throw new \Exception("Not enough stock for {$product->name}");
+                    throw new \Exception("Not enough stock for {$product->name}. Available: {$product->stock_quantity}, Requested: {$item['quantity']}");
                 }
 
                 OrderItem::create([
@@ -121,7 +123,9 @@ class CheckoutController extends Controller
 
                 // Reduce stock
                 $product->decrement('stock_quantity', $item['quantity']);
-            } // Simulate payment processing
+            }
+
+            // Simulate payment processing
             // In a real application, you would integrate with a payment gateway here
             $order->update(['status' => 'processing']);
 
@@ -141,11 +145,17 @@ class CheckoutController extends Controller
         } catch (Exception $e) {
             // Log any other errors
             Log::error('Checkout failed: ' . $e->getMessage());
+            Log::error('Stack trace: ' . $e->getTraceAsString());
             DB::rollback();
+
+            // In development, show the actual error message for debugging
+            $errorMessage = app()->environment('local')
+                ? $e->getMessage()
+                : 'There was a problem processing your order. Please try again.';
 
             return back()
                 ->withInput()
-                ->with('error', 'There was a problem processing your order. Please try again.');
+                ->with('error', $errorMessage);
         }
     }
 }
