@@ -39,13 +39,13 @@
 
 <body>
     <!-- Navigation -->
-    @include('layouts.navigation')
+    <x-front-navigation />
 
     <!-- Content  -->
     @yield('content')
 
     <!-- Footer -->
-    @include('layouts.footer')
+    <x-front-footer />
 
     <!-- Back to Top Button -->
     <button
