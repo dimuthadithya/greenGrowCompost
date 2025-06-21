@@ -59,12 +59,14 @@ class OrderSeeder extends Seeder
                 $product = $products->random();
                 $quantity = rand(1, 3);
                 $price = $product->price;
+                $subtotal = $price * $quantity;
 
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $quantity,
                     'price' => $price,
+                    'subtotal' => $subtotal,
                     'created_at' => $orderDate,
                     'updated_at' => $orderDate,
                 ]);
