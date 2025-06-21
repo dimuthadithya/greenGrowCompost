@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-5 col-8">
                                 <h5 class="mb-2">{{ $item['name'] }}</h5>
-                                <p class="text-muted mb-0">${{ number_format($item['price'], 2) }} each</p>
+                                <p class="text-muted mb-0">LKR {{ number_format($item['price'], 2) }} each</p>
                             </div>
                             <div class="col-md-2 col-6">
                                 <form action="{{ route('cart.update', $id) }}" method="POST" class="d-inline">
@@ -75,7 +75,7 @@
                                 </form>
                             </div>
                             <div class="col-md-2 col-4">
-                                <span class="fw-bold">${{ number_format($item['price'] * $item['quantity'], 2) }}</span>
+                                <span class="fw-bold">LKR {{ number_format($item['price'] * $item['quantity'], 2) }}</span>
                             </div>
                             <div class="col-md-1 col-2 text-end">
                                 <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
@@ -120,7 +120,7 @@
                         <h4 class="mb-4">Order Summary</h4>
                         <div class="d-flex justify-content-between mb-3">
                             <span>Subtotal</span>
-                            <span class="fw-bold">${{ number_format($total, 2) }}</span>
+                            <span class="fw-bold">LKR {{ number_format($total, 2) }}</span>
                         </div>
                         @php
                         $shipping = count($cart) > 0 ? 5.00 : 0;
@@ -129,16 +129,16 @@
                         @endphp
                         <div class="d-flex justify-content-between mb-3">
                             <span>Shipping</span>
-                            <span class="fw-bold">${{ number_format($shipping, 2) }}</span>
+                            <span class="fw-bold">LKR {{ number_format($shipping, 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span>Tax (10%)</span>
-                            <span class="fw-bold">${{ number_format($tax, 2) }}</span>
+                            <span class="fw-bold">LKR {{ number_format($tax, 2) }}</span>
                         </div>
                         <hr />
                         <div class="d-flex justify-content-between mb-4">
                             <span class="fw-bold">Total</span>
-                            <span class="fw-bold text-success h4 mb-0">${{ number_format($grandTotal, 2) }}</span>
+                            <span class="fw-bold text-success h4 mb-0">LKR {{ number_format($grandTotal, 2) }}</span>
                         </div>
 
                         <!-- Promo Code -->

@@ -27,6 +27,24 @@ class Order extends Model
         'total' => 'decimal:2'
     ];
 
+    protected $appends = ['order_number'];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($order) {
+            $latestOrder = static::latest()->first();
+            $number = $latestOrder ? intval(substr($latestOrder->order_number, 3)) + 1 : 1;
+            $order->order_number = 'GGC' . str_pad($number, 8, '0', STR_PAD_LEFT);
+        });
+    }
+
+    public function getOrderNumberAttribute()
+    {
+        return 'GGC' . str_pad($this->id, 8, '0', STR_PAD_LEFT);
+    }
+
     /**
      * Get the user that owns the order.
      */
@@ -80,6 +98,22 @@ class Order extends Model
         })
             ->filter()
             ->implode(', ');
+    }
+
+    /**
+     * Get the total amount for the order.
+     */
+    public function getTotalAmountAttribute()
+    {
+        if ($this->total) {
+            return $this->total;
+        }
+
+        $total = 0;
+        foreach ($this->items as $item) {
+            $total += $item->quantity * $item->unit_price;
+        }
+        return $total;
     }
 
     /**

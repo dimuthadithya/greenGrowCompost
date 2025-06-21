@@ -186,7 +186,7 @@
                                     <h6 class="mb-0">{{ $item['name'] }}</h6>
                                     <small class="text-muted">Quantity: {{ $item['quantity'] }}</small>
                                 </div>
-                                <span>${{ number_format($item['price'] * $item['quantity'], 2) }}</span>
+                                <span>LKR {{ number_format($item['price'] * $item['quantity'], 2) }}</span>
                             </div>
                             @endforeach
 
@@ -195,21 +195,21 @@
                             <!-- Order Totals -->
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Subtotal</span>
-                                <span>${{ number_format($total, 2) }}</span>
+                                <span>LKR {{ number_format($total, 2) }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Shipping</span>
-                                <span>${{ number_format($shipping, 2) }}</span>
+                                <span>LKR {{ number_format($shipping, 2) }}</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Tax (10%)</span>
-                                <span>${{ number_format($tax, 2) }}</span>
+                                <span>LKR {{ number_format($tax, 2) }}</span>
                             </div>
                             <hr>
                             <div class="d-flex justify-content-between mb-4">
                                 <span class="fw-bold">Total</span>
                                 <span class="fw-bold text-success h4 mb-0">
-                                    ${{ number_format($total + $shipping + $tax, 2) }}
+                                    LKR {{ number_format($total + $shipping + $tax, 2) }}
                                 </span>
                             </div>
 
