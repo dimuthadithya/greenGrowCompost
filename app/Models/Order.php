@@ -33,9 +33,9 @@ class Order extends Model
     /**
      * Get the user that owns the order.
      */
-    public function customer(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
     /**
