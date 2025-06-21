@@ -9,7 +9,14 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('cart');
+        $cart = session('cart', []);
+        $total = 0;
+
+        foreach ($cart as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+
+        return view('cart', compact('cart', 'total'));
     }
 
     public function add(Request $request, Product $product)
@@ -64,5 +71,11 @@ class CartController extends Controller
         }
 
         return redirect()->back()->with('success', 'Cart updated successfully!');
+    }
+
+    public function clear()
+    {
+        session()->forget('cart');
+        return redirect()->back()->with('success', 'Cart cleared successfully!');
     }
 }

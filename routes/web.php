@@ -36,12 +36,8 @@ Route::controller(CartController::class)->group(function () {
     Route::post('/cart/add/{product}', 'add')->name('cart.add');
     Route::delete('/cart/remove/{product}', 'remove')->name('cart.remove');
     Route::patch('/cart/update/{product}', 'update')->name('cart.update');
+    Route::delete('/cart/clear', 'clear')->name('cart.clear');
 });
-
-Route::post('/cart/add/{product}', function (App\Models\Product $product) {
-    // TODO: Implement cart functionality
-    return redirect()->back()->with('success', 'Product added to cart');
-})->name('cart.add');
 
 Route::get('/order/{id}', function ($id) {
     return view('orderdeatils', ['order' => $id]);
@@ -82,5 +78,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Contact Messages Management
     Route::resource('contact', ContactController::class)->only(['index', 'show', 'destroy']);
 });
+
+// Checkout Routes
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
 
 require __DIR__ . '/auth.php';
