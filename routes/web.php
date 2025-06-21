@@ -41,7 +41,8 @@ Route::controller(CartController::class)->group(function () {
 });
 
 Route::get('/order/{id}', function ($id) {
-    return view('orderdeatils', ['order' => $id]);
+    $order = \App\Models\Order::with(['items.product', 'address'])->findOrFail($id);
+    return view('orderdeatils', ['order' => $order]);
 })->name('order.details');
 
 

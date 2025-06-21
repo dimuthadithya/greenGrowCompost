@@ -100,10 +100,17 @@ class CheckoutController extends Controller
                 'tax' => $tax,
                 'shipping' => $shipping,
                 'status' => 'pending',
-            ]);
-
-            // Create order items
+            ]);            // Create order items and validate stock
             foreach ($cart as $id => $item) {
+                $product = \App\Models\Product::find($id);
+                if (!$product) {
+                    throw new \Exception("Product not found");
+                }
+
+                if ($product->stock_quantity < $item['quantity']) {
+                    throw new \Exception("Not enough stock for {$product->name}");
+                }
+
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $id,
@@ -111,18 +118,18 @@ class CheckoutController extends Controller
                     'price' => $item['price'],
                     'subtotal' => $item['price'] * $item['quantity'],
                 ]);
-            }
 
-            // Simulate payment processing
+                // Reduce stock
+                $product->decrement('stock_quantity', $item['quantity']);
+            } // Simulate payment processing
             // In a real application, you would integrate with a payment gateway here
-            $order->update(['status' => 'paid']);
+            $order->update(['status' => 'processing']);
 
             // Clear cart
             session()->forget('cart');
 
             DB::commit();
-
-            return redirect()->route('order.confirmation', $order->id)
+            return redirect()->route('order.details', ['id' => $order->id])
                 ->with('success', 'Your order has been placed successfully!');
         } catch (\Illuminate\Validation\ValidationException $e) {
             // Log validation errors
