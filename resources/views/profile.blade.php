@@ -290,76 +290,64 @@
                                     </button>
                                 </div>
                                 <div class="row g-4">
-                                    <!-- Default Address -->
+                                    @forelse(Auth::user()->addresses as $address)
                                     <div class="col-md-6">
                                         <div class="card h-100">
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between mb-2">
-                                                    <h5 class="card-title">Home</h5>
+                                                    <h5 class="card-title">{{ ucfirst($address->label) }}</h5>
+                                                    @if($address->is_default)
                                                     <span class="badge bg-success">Default</span>
+                                                    @endif
                                                 </div>
                                                 <address class="mb-4">
-                                                    123 Green Street<br />
-                                                    Colombo 05<br />
-                                                    Western Province<br />
-                                                    Sri Lanka<br />
-                                                    <strong>Phone:</strong> +94 77 123 4567
+                                                    {{ $address->street_address }}<br />
+                                                    {{ $address->city }}<br />
+                                                    {{ $address->province }}<br />
+                                                    {{ $address->country }}<br />
+                                                    <strong>Phone:</strong> {{ $address->phone }}
                                                 </address>
                                                 <div class="btn-group btn-group-sm">
                                                     <button
-                                                        class="btn btn-outline-success"
+                                                        class="btn btn-outline-success edit-address"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#editAddressModal"
-                                                        data-bs-label="Home"
-                                                        data-bs-street="123 Green Street"
-                                                        data-bs-city="Colombo 05"
-                                                        data-bs-province="Western Province"
-                                                        data-bs-country="Sri Lanka"
-                                                        data-bs-phone="+94 77 123 4567">
+                                                        data-address-id="{{ $address->id }}"
+                                                        data-label="{{ $address->label }}"
+                                                        data-street="{{ $address->street_address }}"
+                                                        data-city="{{ $address->city }}"
+                                                        data-province="{{ $address->province }}"
+                                                        data-country="{{ $address->country }}"
+                                                        data-phone="{{ $address->phone }}">
                                                         Edit
                                                     </button>
-                                                    <button class="btn btn-outline-danger">
-                                                        Delete
-                                                    </button>
+                                                    <form action="{{ route('addresses.destroy', $address->id) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this address?')">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                    @if(!$address->is_default)
+                                                    <form action="{{ route('addresses.default', $address->id) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <button type="submit" class="btn btn-outline-success">
+                                                            Set as Default
+                                                        </button>
+                                                    </form>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Work Address -->
-                                    <div class="col-md-6">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <h5 class="card-title mb-2">Work</h5>
-                                                <address class="mb-4">
-                                                    456 Office Complex<br />
-                                                    Rajagiriya<br />
-                                                    Western Province<br />
-                                                    Sri Lanka<br />
-                                                    <strong>Phone:</strong> +94 77 987 6543
-                                                </address>
-                                                <div class="btn-group btn-group-sm">
-                                                    <button
-                                                        class="btn btn-outline-success"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editAddressModal"
-                                                        data-bs-label="Work"
-                                                        data-bs-street="456 Office Complex"
-                                                        data-bs-city="Rajagiriya"
-                                                        data-bs-province="Western Province"
-                                                        data-bs-country="Sri Lanka"
-                                                        data-bs-phone="+94 77 987 6543">
-                                                        Edit
-                                                    </button>
-                                                    <button class="btn btn-outline-danger">
-                                                        Delete
-                                                    </button>
-                                                    <button class="btn btn-outline-success">
-                                                        Set as Default
-                                                    </button>
-                                                </div>
-                                            </div>
+                                    @empty
+                                    <div class="col-12">
+                                        <div class="alert alert-info">
+                                            You haven't added any addresses yet.
                                         </div>
                                     </div>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -381,73 +369,104 @@
                     class="btn-close"
                     data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Address Label</label>
-                    <select class="form-select">
-                        <option value="">Select a label</option>
-                        <option value="home">Home</option>
-                        <option value="work">Work</option>
-                        <option value="other">Other</option>
-                    </select>
+            <form action="{{ route('addresses.store') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Address Label</label>
+                        <select class="form-select" name="label" required>
+                            <option value="">Select a label</option>
+                            <option value="home">Home</option>
+                            <option value="work">Work</option>
+                            <option value="other">Other</option>
+                        </select>
+                        @error('label')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Street Address</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="street_address"
+                            placeholder="Enter your street address"
+                            required />
+                        @error('street_address')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="city"
+                            placeholder="Enter your city"
+                            required />
+                        @error('city')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Province</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="province"
+                            placeholder="Enter your province"
+                            required />
+                        @error('province')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Country</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            name="country"
+                            placeholder="Enter your country"
+                            required />
+                        @error('country')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input
+                            type="tel"
+                            class="form-control"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            required />
+                        @error('phone')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-check mb-3">
+                        <input
+                            type="checkbox"
+                            class="form-check-input"
+                            name="is_default"
+                            id="setAsDefault"
+                            value="1" />
+                        <label class="form-check-label" for="setAsDefault">Set as default address</label>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Street Address</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter your street address" />
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+                        Add Address
+                    </button>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">City</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter your city" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Province</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter your province" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Country</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Enter your country" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Phone Number</label>
-                    <input
-                        type="tel"
-                        class="form-control"
-                        placeholder="Enter your phone number" />
-                </div>
-                <div class="form-check mb-3">
-                    <input
-                        type="checkbox"
-                        class="form-check-input"
-                        id="setAsDefault" />
-                    <label class="form-check-label" for="setAsDefault">Set as default address</label>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">
-                    Cancel
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success"
-                    data-bs-dismiss="modal">
-                    Add Address
-                </button>
-            </div>
         </div>
     </div>
 </div>
@@ -463,46 +482,70 @@
                     class="btn-close"
                     data-bs-dismiss="modal"></button>
             </div>
-            <div class="modal-body">
-                <div class="mb-3">
-                    <label class="form-label">Address Label</label>
-                    <input type="text" class="form-control" />
+            <form action="{{ route('addresses.update', '') }}" method="POST" id="editAddressForm">
+                @csrf
+                @method('patch')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Address Label</label>
+                        <select class="form-select" name="label" required>
+                            <option value="home">Home</option>
+                            <option value="work">Work</option>
+                            <option value="other">Other</option>
+                        </select>
+                        @error('label')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Street Address</label>
+                        <input type="text" class="form-control" name="street_address" required />
+                        @error('street_address')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">City</label>
+                        <input type="text" class="form-control" name="city" required />
+                        @error('city')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Province</label>
+                        <input type="text" class="form-control" name="province" required />
+                        @error('province')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Country</label>
+                        <input type="text" class="form-control" name="country" required />
+                        @error('country')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" name="phone" required />
+                        @error('phone')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Street Address</label>
-                    <input type="text" class="form-control" />
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+                        Save Changes
+                    </button>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">City</label>
-                    <input type="text" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Province</label>
-                    <input type="text" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Country</label>
-                    <input type="text" class="form-control" />
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" />
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal">
-                    Cancel
-                </button>
-                <button
-                    type="button"
-                    class="btn btn-success"
-                    data-bs-dismiss="modal">
-                    Save Changes
-                </button>
-            </div>
         </div>
     </div>
 </div>
@@ -587,3 +630,28 @@
 </div>
 @endif
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Handle edit address button clicks
+        document.querySelectorAll('.edit-address').forEach(button => {
+            button.addEventListener('click', function() {
+                const addressId = this.dataset.addressId;
+                const form = document.getElementById('editAddressForm');
+
+                // Update form action URL
+                form.action = form.action + '/' + addressId;
+
+                // Set form values
+                form.querySelector('[name="label"]').value = this.dataset.label;
+                form.querySelector('[name="street_address"]').value = this.dataset.street;
+                form.querySelector('[name="city"]').value = this.dataset.city;
+                form.querySelector('[name="province"]').value = this.dataset.province;
+                form.querySelector('[name="country"]').value = this.dataset.country;
+                form.querySelector('[name="phone"]').value = this.dataset.phone;
+            });
+        });
+    });
+</script>
+@endpush
