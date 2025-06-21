@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\DB;
 
 class Order extends Model
 {
@@ -127,5 +128,21 @@ class Order extends Model
             'cancelled' => 'danger',
             default => 'secondary',
         };
+    }
+
+    public static function createOrder(array $attributes)
+    {
+        return DB::transaction(function () use ($attributes) {
+            // Generate the order number first
+            $sequence = DB::table('order_sequences')->insertGetId([
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+
+            $attributes['order_number'] = 'GGC' . str_pad($sequence, 8, '0', STR_PAD_LEFT);
+
+            // Create the order with the generated number
+            return static::create($attributes);
+        });
     }
 }

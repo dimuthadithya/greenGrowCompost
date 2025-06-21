@@ -89,9 +89,8 @@ class CheckoutController extends Controller
             }
             $shipping = 5.00;
             $tax = $subtotal * 0.10;
-            $total = $subtotal + $shipping + $tax;
-
-            // Create order
+            $total = $subtotal + $shipping + $tax;            // Create order with a unique order number
+            $orderNumber = Order::generateUniqueOrderNumber();
             $order = Order::create([
                 'user_id' => Auth::id(),
                 'address_id' => $address->id,
@@ -100,6 +99,7 @@ class CheckoutController extends Controller
                 'tax' => $tax,
                 'shipping' => $shipping,
                 'status' => 'pending',
+                'order_number' => $orderNumber,
             ]);
 
             // Create order items and validate stock

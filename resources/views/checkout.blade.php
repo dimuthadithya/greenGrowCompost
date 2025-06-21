@@ -125,6 +125,7 @@
                                         name="card_number"
                                         placeholder="0000 0000 0000 0000"
                                         maxlength="19"
+                                        value="4242 4242 4242 4242"
                                         required>
                                     <div class="invalid-feedback">
                                         Please enter a valid 16-digit card number
@@ -138,6 +139,7 @@
                                         name="expiry_date"
                                         placeholder="MM/YY"
                                         maxlength="5"
+                                        value="12/25"
                                         required>
                                     <div class="invalid-feedback">
                                         Please enter a valid expiry date (MM/YY)
@@ -148,6 +150,7 @@
                                     <input type="text"
                                         class="form-control card-input"
                                         id="cvv"
+                                        value="123"
                                         name="cvv"
                                         placeholder="000"
                                         maxlength="3"
@@ -163,6 +166,7 @@
                                         id="card_holder"
                                         name="card_holder"
                                         placeholder="Name on card"
+                                        value="John Doe"
                                         required>
                                     <div class="invalid-feedback">
                                         Please enter the card holder's name
