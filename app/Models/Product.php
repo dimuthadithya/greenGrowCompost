@@ -11,14 +11,19 @@ use Illuminate\Support\Str;
 class Product extends Model
 {
     use HasFactory;
+
     protected $fillable = [
         'name',
         'slug',
         'description',
         'price',
+        'weight',
+        'unit',
+        'image',
         'stock_quantity',
-        'category_id',
-        'image'
+        'is_featured',
+        'is_active',
+        'category_id'
     ];
 
     protected static function boot()
