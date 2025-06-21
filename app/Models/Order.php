@@ -17,7 +17,8 @@ class Order extends Model
         'subtotal',
         'tax',
         'shipping',
-        'total'
+        'total',
+        'order_number'
     ];
 
     protected $casts = [
