@@ -13,7 +13,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::where('is_admin', false)
+        $customers = User::where('role', 'customer')
             ->withCount('orders')
             ->latest()
             ->paginate(10);
