@@ -69,9 +69,9 @@
             @forelse($recentOrders as $order)
             <tr>
                 <td>#{{ $order->order_number }}</td>
-                <td>{{ $order->customer->name }}</td>
+                <td>{{ optional($order->user)->name ?? 'N/A' }}</td>
                 <td>{{ $order->items_summary }}</td>
-                <td>${{ number_format($order->total, 2) }}</td>
+                <td>${{ number_format($order->total_amount ?? 0, 2) }}</td>
                 <td><span class="badge bg-{{ $order->status_color }}">{{ $order->status }}</span></td>
                 <td>
                     <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-sm btn-outline-primary">View</a>
@@ -103,8 +103,8 @@
             @forelse($lowStockProducts as $product)
             <tr>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->category->name }}</td>
-                <td><span class="text-{{ $product->stock <= 5 ? 'danger' : 'warning' }}">{{ $product->stock }} units</span></td>
+                <td>{{ optional($product->category)->name ?? 'Uncategorized' }}</td>
+                <td><span class="text-{{ $product->stock_quantity <= 5 ? 'danger' : 'warning' }}">{{ $product->stock_quantity }} units</span></td>
                 <td>${{ number_format($product->price, 2) }}</td>
                 <td>
                     <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-outline-primary">

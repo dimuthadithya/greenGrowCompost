@@ -10,34 +10,31 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'order_number',
         'user_id',
         'status',
-        'total',
-        'payment_method',
-        'payment_status',
+        'total_amount',
         'shipping_address',
-        'billing_address',
-        'shipping_method',
-        'shipping_cost',
+        'shipping_city',
+        'shipping_state',
+        'shipping_postal_code',
+        'shipping_phone',
         'notes'
     ];
-
     protected $casts = [
-        'shipping_address' => 'array',
-        'billing_address' => 'array',
+        'shipped_at' => 'datetime',
+        'delivered_at' => 'datetime',
+        'total_amount' => 'decimal:2'
     ];
 
     /**
      * Get the user that owns the order.
      */
-    public function customer(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
-
     /**
      * Get the items for the order.
      */
@@ -45,15 +42,35 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
-
     /**
      * Get the items summary for display.
      */
     public function getItemsSummaryAttribute(): string
     {
-        return $this->items->map(function ($item) {
-            return $item->product->name . ' (' . $item->quantity . ')';
-        })->implode(', ');
+        // Access the already loaded relationship instead of making a new query
+        $items = $this->items()->with('product')->get();
+
+        if ($items->isEmpty()) {
+            return 'No items';
+        }
+
+        return $items->map(function ($item) {
+            if (!$item) {
+                return null;
+            }
+
+            $productName = 'Product Removed';
+            $quantity = $item->quantity ?? 0;
+            $price = $item->price ?? 0;
+
+            if ($item->product) {
+                $productName = $item->product->name;
+            }
+
+            return "{$productName} (x{$quantity} @ $" . number_format($price, 2) . ")";
+        })
+            ->filter()
+            ->implode(', ');
     }
 
     /**
