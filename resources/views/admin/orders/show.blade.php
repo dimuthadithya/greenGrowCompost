@@ -122,13 +122,17 @@
                 <h5 class="card-title mb-0">Customer Information</h5>
             </div>
             <div class="card-body">
-                <p class="mb-1"><strong>Name:</strong> {{ $order->customer->name }}</p>
-                <p class="mb-1"><strong>Email:</strong> {{ $order->customer->email }}</p>
+                @if($order->user)
+                <p class="mb-1"><strong>Name:</strong> {{ $order->user->name }}</p>
+                <p class="mb-1"><strong>Email:</strong> {{ $order->user->email }}</p>
                 <p class="mb-0">
-                    <a href="{{ route('admin.customers.show', $order->customer) }}" class="btn btn-sm btn-outline-primary mt-2">
+                    <a href="{{ route('admin.customers.show', $order->user_id) }}" class="btn btn-sm btn-outline-primary mt-2">
                         View Customer Profile
                     </a>
                 </p>
+                @else
+                <p class="text-muted mb-0">Customer information not available</p>
+                @endif
             </div>
         </div>
 
