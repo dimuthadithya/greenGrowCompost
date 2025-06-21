@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\ProductReview;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,10 +17,32 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        $user = Auth::user();
+
+        // Get recent orders for the user
+        $recentOrders = Order::where('user_id', $user->id)
+            ->with(['items.product'])
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        // Get statistics
+        $totalOrders = Order::where('user_id', $user->id)->count();
+        $totalProducts = OrderItem::whereIn('order_id', function ($query) use ($user) {
+            $query->select('id')->from('orders')->where('user_id', $user->id);
+        })->sum('quantity');
+        $totalReviews = ProductReview::where('user_id', $user->id)->count();
+
+        return view('profile', [
+            'user' => $user,
+            'recentOrders' => $recentOrders,
+            'stats' => [
+                'totalOrders' => $totalOrders,
+                'totalProducts' => $totalProducts,
+                'totalReviews' => $totalReviews,
+            ]
         ]);
     }
 
@@ -26,15 +51,16 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
+        $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        $user->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return back()->with('status', 'profile-updated');
     }
 
     /**
@@ -46,7 +72,7 @@ class ProfileController extends Controller
             'password' => ['required', 'current_password'],
         ]);
 
-        $user = $request->user();
+        $user = Auth::user();
 
         Auth::logout();
 

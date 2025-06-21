@@ -25,18 +25,18 @@
             <div class="col-lg-2">
                 <h5 class="mb-4">Support</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ route('contact') }}" class="text-muted text-decoration-none">Contact Us</a></li>
-                    <li class="mb-2"><a href="{{ route('faq') }}" class="text-muted text-decoration-none">FAQs</a></li>
-                    <li class="mb-2"><a href="{{ route('shipping') }}" class="text-muted text-decoration-none">Shipping Info</a></li>
-                    <li class="mb-2"><a href="{{ route('returns') }}" class="text-muted text-decoration-none">Returns</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">Contact Us</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">FAQs</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">Shipping Info</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">Returns</a></li>
                 </ul>
             </div>
             <div class="col-lg-2">
                 <h5 class="mb-4">Legal</h5>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ route('privacy') }}" class="text-muted text-decoration-none">Privacy Policy</a></li>
-                    <li class="mb-2"><a href="{{ route('terms') }}" class="text-muted text-decoration-none">Terms of Service</a></li>
-                    <li class="mb-2"><a href="{{ route('refund') }}" class="text-muted text-decoration-none">Refund Policy</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">Terms of Service</a></li>
+                    <li class="mb-2"><a href="" class="text-muted text-decoration-none">Refund Policy</a></li>
                 </ul>
             </div>
             <div class="col-lg-2">
