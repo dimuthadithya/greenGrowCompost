@@ -130,26 +130,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse($recentOrders as $order)
                                             <tr>
-                                                <td>#ORD-2025-001</td>
-                                                <td>June 15, 2025</td>
+                                                <td>{{ $order->order_number }}</td>
+                                                <td>{{ $order->created_at->format('F d, Y') }}</td>
                                                 <td>
-                                                    <span class="badge bg-success">Delivered</span>
+                                                    @php
+                                                    $statusClass = match($order->status) {
+                                                    'delivered' => 'bg-success',
+                                                    'shipped' => 'bg-info',
+                                                    'processing' => 'bg-warning',
+                                                    'cancelled' => 'bg-danger',
+                                                    default => 'bg-secondary'
+                                                    };
+                                                    @endphp
+                                                    <span class="badge {{ $statusClass }}">
+                                                        {{ ucfirst($order->status) }}
+                                                    </span>
                                                 </td>
-                                                <td>Rs. 2,400</td>
+                                                <td>Rs. {{ number_format($order->total_amount, 2) }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-outline-success">View</a>
+                                                    <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-outline-success">View</a>
                                                 </td>
                                             </tr>
+                                            @empty
                                             <tr>
-                                                <td>#ORD-2025-002</td>
-                                                <td>June 10, 2025</td>
-                                                <td><span class="badge bg-info">Shipped</span></td>
-                                                <td>Rs. 3,600</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-sm btn-outline-success">View</a>
-                                                </td>
+                                                <td colspan="5" class="text-center">No orders found</td>
                                             </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -165,7 +173,7 @@
                                             <i class="fas fa-shopping-cart fa-2x"></i>
                                         </div>
                                         <h5 class="card-title">Total Orders</h5>
-                                        <p class="h3 text-success mb-0">12</p>
+                                        <p class="h3 text-success mb-0">{{ $stats['totalOrders'] }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +184,7 @@
                                             <i class="fas fa-leaf fa-2x"></i>
                                         </div>
                                         <h5 class="card-title">Products Bought</h5>
-                                        <p class="h3 text-success mb-0">25</p>
+                                        <p class="h3 text-success mb-0">{{ $stats['totalProducts'] }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +195,7 @@
                                             <i class="fas fa-star fa-2x"></i>
                                         </div>
                                         <h5 class="card-title">Reviews Given</h5>
-                                        <p class="h3 text-success mb-0">8</p>
+                                        <p class="h3 text-success mb-0">{{ $stats['totalReviews'] }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -212,63 +220,54 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse($recentOrders as $order)
                                             <tr>
-                                                <td>#ORD-2025-001</td>
-                                                <td>June 15, 2025</td>
-                                                <td>Premium Garden Compost (2)</td>
+                                                <td>{{ $order->order_number }}</td>
+                                                <td>{{ $order->created_at->format('F d, Y') }}</td>
                                                 <td>
-                                                    <span class="badge bg-success">Delivered</span>
+                                                    @foreach($order->items as $item)
+                                                    {{ $item->product->name }} ({{ $item->quantity }})
+                                                    @if(!$loop->last), @endif
+                                                    @endforeach
                                                 </td>
-                                                <td>Rs. 2,400</td>
+                                                <td>
+                                                    @php
+                                                    $statusClass = match($order->status) {
+                                                    'delivered' => 'bg-success',
+                                                    'shipped' => 'bg-info',
+                                                    'processing' => 'bg-warning',
+                                                    'cancelled' => 'bg-danger',
+                                                    default => 'bg-secondary'
+                                                    };
+                                                    @endphp
+                                                    <span class="badge {{ $statusClass }}">
+                                                        {{ ucfirst($order->status) }}
+                                                    </span>
+                                                </td>
+                                                <td>Rs. {{ number_format($order->total_amount, 2) }}</td>
                                                 <td>
                                                     <div class="btn-group btn-group-sm">
-                                                        <a
-                                                            href="order-details.html"
-                                                            class="btn btn-outline-success">
+                                                        <a href="{{ route('order.details', $order->id) }}" class="btn btn-outline-success">
                                                             View
                                                         </a>
-                                                        <button class="btn btn-outline-success">
-                                                            Invoice
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>#ORD-2025-002</td>
-                                                <td>June 10, 2025</td>
-                                                <td>Veggie Pro Compost (3)</td>
-                                                <td><span class="badge bg-info">Shipped</span></td>
-                                                <td>Rs. 3,600</td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-success">
-                                                            View
-                                                        </button>
-                                                        <button class="btn btn-outline-success">
+                                                        @if($order->status === 'shipped')
+                                                        <button class="btn btn-outline-success" onclick="window.location.href='{{ route('track.order') }}?order={{ $order->order_number }}'">
                                                             Track
                                                         </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>#ORD-2025-003</td>
-                                                <td>June 5, 2025</td>
-                                                <td>Flower Garden Mix (1)</td>
-                                                <td>
-                                                    <span class="badge bg-success">Delivered</span>
-                                                </td>
-                                                <td>Rs. 1,500</td>
-                                                <td>
-                                                    <div class="btn-group btn-group-sm">
-                                                        <button class="btn btn-outline-success">
-                                                            View
-                                                        </button>
-                                                        <button class="btn btn-outline-success">
+                                                        @endif
+                                                        @if(in_array($order->status, ['delivered', 'shipped']))
+                                                        <a href="#" class="btn btn-outline-success">
                                                             Invoice
-                                                        </button>
+                                                        </a>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="6" class="text-center">No orders found</td>
+                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
