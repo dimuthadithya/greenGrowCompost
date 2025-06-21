@@ -18,9 +18,8 @@ class ProductCategory extends Model
 
     /**
      * Get the products for the category.
-     */
-    public function products(): HasMany
+     */    public function products(): HasMany
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'category_id');
     }
 }

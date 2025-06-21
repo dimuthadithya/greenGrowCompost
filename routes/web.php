@@ -5,15 +5,15 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
-use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [ProductController::class, 'home'])->name('home');
 
 // Public Contact Routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -21,13 +21,8 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 // Product Routes
 Route::prefix('products')->name('products.')->group(function () {
-    Route::get('/', function () {
-        return view('products');
-    })->name('index');
-
-    Route::get('/{product}', function ($product) {
-        return view('productdetails', ['product' => $product]);
-    })->name('show');
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::get('/{product}', [ProductController::class, 'show'])->name('show');
 });
 
 // Order Routes
@@ -35,9 +30,14 @@ Route::get('/track-order', function () {
     return view('trackorder');
 })->name('track.order');
 
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+// Cart Routes
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'index')->name('cart');
+    Route::post('/cart/add/{product}', 'add')->name('cart.add');
+    Route::delete('/cart/remove/{product}', 'remove')->name('cart.remove');
+    Route::patch('/cart/update/{product}', 'update')->name('cart.update');
+    Route::delete('/cart/clear', 'clear')->name('cart.clear');
+});
 
 Route::get('/order/{id}', function ($id) {
     return view('orderdeatils', ['order' => $id]);
@@ -67,7 +67,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Products Management
-    Route::resource('products', ProductController::class);
+    Route::resource('products', AdminProductController::class);
 
     // Orders Management
     Route::resource('orders', OrderController::class);
@@ -78,5 +78,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     // Contact Messages Management
     Route::resource('contact', ContactController::class)->only(['index', 'show', 'destroy']);
 });
+
+// Checkout Routes
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
 
 require __DIR__ . '/auth.php';

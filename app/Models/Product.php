@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -16,17 +17,31 @@ class Product extends Model
         'slug',
         'description',
         'price',
-        'stock',
-        'category_id',
-        'image'
+        'weight',
+        'unit',
+        'image',
+        'stock_quantity',
+        'is_featured',
+        'is_active',
+        'category_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            if (!$product->slug) {
+                $product->slug = Str::slug($product->name);
+            }
+        });
+    }
 
     /**
      * Get the category that owns the product.
-     */
-    public function category(): BelongsTo
+     */    public function category(): BelongsTo
     {
-        return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class, 'category_id');
     }
 
     /**

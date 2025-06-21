@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ProductSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'name' => 'Premium Organic Compost',
+                'slug' => Str::slug('Premium Organic Compost'),
                 'description' => 'Our finest organic compost blend, perfect for all gardening needs',
                 'price' => 19.99,
                 'weight' => 20.00,
