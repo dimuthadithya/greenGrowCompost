@@ -37,13 +37,12 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
-
     /**
      * Get the items for the order.
      */
     public function items(): HasMany
     {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(OrderItem::class)->with('product');
     }
 
     /**
@@ -52,7 +51,8 @@ class Order extends Model
     public function getItemsSummaryAttribute(): string
     {
         return $this->items->map(function ($item) {
-            return $item->product->name . ' (' . $item->quantity . ')';
+            $productName = $item->product ? $item->product->name : 'Unknown Product';
+            return $productName . ' (' . $item->quantity . ')';
         })->implode(', ');
     }
 

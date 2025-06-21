@@ -30,10 +30,8 @@ class DashboardController extends Controller
             ->count();
 
         $newProducts = Product::whereMonth('created_at', now())
-            ->count();
-
-        // Get recent orders
-        $recentOrders = Order::with('user')
+            ->count();        // Get recent orders
+        $recentOrders = Order::with(['user', 'items.product'])
             ->latest()
             ->take(10)
             ->get();
