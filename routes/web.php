@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
@@ -29,9 +30,13 @@ Route::get('/track-order', function () {
     return view('trackorder');
 })->name('track.order');
 
-Route::get('/cart', function () {
-    return view('cart');
-})->name('cart');
+// Cart Routes
+Route::controller(CartController::class)->group(function () {
+    Route::get('/cart', 'index')->name('cart');
+    Route::post('/cart/add/{product}', 'add')->name('cart.add');
+    Route::delete('/cart/remove/{product}', 'remove')->name('cart.remove');
+    Route::patch('/cart/update/{product}', 'update')->name('cart.update');
+});
 
 Route::post('/cart/add/{product}', function (App\Models\Product $product) {
     // TODO: Implement cart functionality
