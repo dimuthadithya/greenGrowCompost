@@ -12,11 +12,32 @@
     </div>
 </div>
 
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="row">
     <div class="col-md-8">
         <div class="card mb-4">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="card-title mb-0">Order Items</h5>
+                <div>
+                    <form action="{{ route('admin.orders.update', $order) }}" method="POST" class="d-flex align-items-center">
+                        @csrf
+                        @method('PUT')
+                        <select name="status" class="form-select form-select-sm me-2" style="width: auto;">
+                            <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
+                            <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                            <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
+                            <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary">Update Status</button>
+                    </form>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

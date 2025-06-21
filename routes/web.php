@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -81,14 +82,6 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('contact', ContactController::class)->only(['index', 'show', 'destroy']);
 });
 
-// Checkout Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
-    Route::get('/order/confirmation/{order}', function ($order) {
-        return view('order.confirmation', compact('order'));
-    })->name('order.confirmation');
-});
 
 // Order Confirmation Route
 Route::get('/order/confirmation/{order}', function ($order) {
