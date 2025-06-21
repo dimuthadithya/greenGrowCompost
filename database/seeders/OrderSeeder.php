@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\Address;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder
@@ -19,75 +20,82 @@ class OrderSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $user = $users->random();
             $orderDate = now()->subDays(rand(1, 30));
-            $orderNumber = 'GG' . str_pad($i + 1, 6, '0', STR_PAD_LEFT);
             $status = $this->getRandomStatus();
 
-            // Calculate shipped_at and delivered_at based on status
-            $shippedAt = null;
-            $deliveredAt = null;
-
-            if (in_array($status, ['shipped', 'delivered'])) {
-                $shippedAt = $orderDate->copy()->addDays(rand(1, 3));
-            }
-
-            if ($status === 'delivered') {
-                $deliveredAt = $shippedAt->copy()->addDays(rand(2, 5));
-            }
-
-            $order = Order::create([
-                'order_number' => $orderNumber,
+            // Create a shipping address for the order
+            $address = Address::create([
                 'user_id' => $user->id,
-                'status' => $status,
-                'total_amount' => 0, // Will be calculated based on items
-                'shipping_address' => fake()->streetAddress(),
-                'shipping_city' => fake()->city(),
-                'shipping_state' => fake()->state(),
-                'shipping_postal_code' => fake()->postcode(),
-                'shipping_phone' => fake()->phoneNumber(),
-                'notes' => fake()->optional(0.3)->sentence(),
+                'first_name' => fake()->firstName(),
+                'last_name' => fake()->lastName(),
+                'address' => fake()->streetAddress(),
+                'city' => fake()->city(),
+                'state' => fake()->state(),
+                'postal_code' => fake()->postcode(),
+                'country' => 'IN', // India
+                'phone' => fake()->phoneNumber(),
                 'created_at' => $orderDate,
                 'updated_at' => $orderDate,
-                'shipped_at' => $shippedAt,
-                'delivered_at' => $deliveredAt,
+            ]);
+
+            // Calculate order totals
+            $subtotal = 0;
+            $shipping = 5.00; // Fixed shipping cost
+
+            // Create the order first with initial values
+            $order = Order::create([
+                'user_id' => $user->id,
+                'address_id' => $address->id,
+                'status' => $status,
+                'subtotal' => 0,
+                'tax' => 0,
+                'shipping' => $shipping,
+                'total' => 0,
+                'created_at' => $orderDate,
+                'updated_at' => $orderDate,
             ]);
 
             // Add 1-5 items to each order
             $numberOfItems = rand(1, 5);
-            $totalAmount = 0;
 
             for ($j = 0; $j < $numberOfItems; $j++) {
                 $product = $products->random();
                 $quantity = rand(1, 3);
                 $price = $product->price;
-                $subtotal = $price * $quantity;
+                $itemSubtotal = $price * $quantity;
+                $subtotal += $itemSubtotal;
 
                 OrderItem::create([
                     'order_id' => $order->id,
                     'product_id' => $product->id,
                     'quantity' => $quantity,
                     'price' => $price,
-                    'subtotal' => $subtotal,
+                    'subtotal' => $itemSubtotal,
                     'created_at' => $orderDate,
                     'updated_at' => $orderDate,
                 ]);
-
-                $totalAmount += ($price * $quantity);
             }
 
-            // Update the order total
+            // Calculate tax and total
+            $tax = $subtotal * 0.10; // 10% tax rate
+            $total = $subtotal + $tax + $shipping;
+
+            // Update the order with final totals
             $order->update([
-                'total_amount' => $totalAmount,
+                'subtotal' => $subtotal,
+                'tax' => $tax,
+                'total' => $total,
             ]);
         }
     }
+
     private function getRandomStatus(): string
     {
         // Define statuses and their weights
         $statuses = [
             'pending' => 20,
             'processing' => 30,
-            'shipped' => 25,
-            'delivered' => 15,
+            'shipped' => 20,
+            'delivered' => 20,
             'cancelled' => 10
         ];
 
@@ -104,7 +112,6 @@ class OrderSeeder extends Seeder
             }
         }
 
-        // Fallback (should never reach here)
-        return 'pending';
+        return 'pending'; // Default status
     }
 }

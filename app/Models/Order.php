@@ -11,21 +11,20 @@ class Order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'order_number',
         'user_id',
+        'address_id',
         'status',
-        'total_amount',
-        'shipping_address',
-        'shipping_city',
-        'shipping_state',
-        'shipping_postal_code',
-        'shipping_phone',
-        'notes'
+        'subtotal',
+        'tax',
+        'shipping',
+        'total'
     ];
+
     protected $casts = [
-        'shipped_at' => 'datetime',
-        'delivered_at' => 'datetime',
-        'total_amount' => 'decimal:2'
+        'subtotal' => 'decimal:2',
+        'tax' => 'decimal:2',
+        'shipping' => 'decimal:2',
+        'total' => 'decimal:2'
     ];
 
     /**
