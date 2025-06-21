@@ -12,7 +12,7 @@ class FeedbackCard extends Component
         public string $name,
         public string $content,
         public string $avatar,
-        public string $rating,
+        public int $rating,
         public ?string $date = null
     ) {}
 

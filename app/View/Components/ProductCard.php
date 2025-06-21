@@ -13,7 +13,7 @@ class ProductCard extends Component
         public string $price,
         public string $image,
         public string $description,
-        public ?string $slug = null
+        public int $productId
     ) {}
 
     public function render(): View|Closure|string
