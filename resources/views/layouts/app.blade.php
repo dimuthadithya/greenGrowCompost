@@ -38,14 +38,11 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    <x-front-navigation />
 
     <!-- Content  -->
     @yield('content')
 
-    <!-- Footer -->
-    <x-front-footer />
+
 
     <!-- Back to Top Button -->
     <button
