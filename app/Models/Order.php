@@ -35,15 +35,12 @@ class Order extends Model
         parent::boot();
 
         static::creating(function ($order) {
-            $latestOrder = static::latest()->first();
-            $number = $latestOrder ? intval(substr($latestOrder->order_number, 3)) + 1 : 1;
-            $order->order_number = 'GGC' . str_pad($number, 8, '0', STR_PAD_LEFT);
+            if (!$order->order_number) {
+                $latestOrder = static::latest()->first();
+                $number = $latestOrder ? intval(substr($latestOrder->order_number, 3)) + 1 : 1;
+                $order->order_number = 'GGC' . str_pad($number, 8, '0', STR_PAD_LEFT);
+            }
         });
-    }
-
-    public function getOrderNumberAttribute()
-    {
-        return 'GGC' . str_pad($this->id, 8, '0', STR_PAD_LEFT);
     }
 
     /**
