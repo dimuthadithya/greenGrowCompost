@@ -71,6 +71,11 @@ class Order extends Model
         return $this->hasMany(OrderItem::class);
     }
 
+    public function isDelivered(): bool
+    {
+        return $this->status === 'delivered';
+    }
+
     /**
      * Get the items summary for display.
      */

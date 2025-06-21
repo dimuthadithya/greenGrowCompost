@@ -124,6 +124,11 @@
 
         <!-- Actions -->
         <div class="text-center">
+            @if($order->status === 'delivered')
+            <a href="{{ route('reviews.create', $order->id) }}" class="btn btn-success">
+                <i class="fas fa-star me-2"></i>Write a Review
+            </a>
+            @endif
             <a href="{{ route('profile.edit') }}" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-2"></i>Back to Profile
             </a>

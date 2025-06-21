@@ -15,7 +15,8 @@ class ProductReview extends Model
         'user_id',
         'rating',
         'comment',
-        'status'
+        'is_verified_purchase',
+        'is_approved'
     ];
 
     /**

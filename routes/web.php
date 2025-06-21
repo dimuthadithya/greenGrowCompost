@@ -11,6 +11,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductReviewController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +64,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/addresses/{address}', [AddressController::class, 'update'])->name('addresses.update');
     Route::delete('/addresses/{address}', [AddressController::class, 'destroy'])->name('addresses.destroy');
     Route::patch('/addresses/{address}/default', [AddressController::class, 'setDefault'])->name('addresses.default');
+});
+
+// Product Review Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders/{order}/reviews', [ProductReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/orders/{order}/reviews', [ProductReviewController::class, 'store'])->name('reviews.store');
 });
 
 // Admin Routes
