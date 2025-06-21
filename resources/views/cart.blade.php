@@ -46,7 +46,7 @@
                             </div>
                             <div class="col-md-5 col-8">
                                 <h5 class="mb-2">{{ $item['name'] }}</h5>
-                                <p class="text-muted mb-0">${{ number_format($item['price'], 2) }} each</p>
+                                <p class="text-muted mb-0">LKR {{ number_format($item['price'], 2) }} each</p>
                             </div>
                             <div class="col-md-2 col-6">
                                 <form action="{{ route('cart.update', $id) }}" method="POST" class="d-inline">
@@ -75,7 +75,7 @@
                                 </form>
                             </div>
                             <div class="col-md-2 col-4">
-                                <span class="fw-bold">${{ number_format($item['price'] * $item['quantity'], 2) }}</span>
+                                <span class="fw-bold">LKR {{ number_format($item['price'] * $item['quantity'], 2) }}</span>
                             </div>
                             <div class="col-md-1 col-2 text-end">
                                 <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
@@ -110,73 +110,70 @@
                         </div>
                         @endif
                     </div>
-
-                </div>
-
-            </div>
-        </div>
-    </div> <!-- Order Summary -->
-    <div class="col-lg-4">
-        <div class="card border-0 shadow-sm">
-            <div class="card-body p-4">
-                <h4 class="mb-4">Order Summary</h4>
-                <div class="d-flex justify-content-between mb-3">
-                    <span>Subtotal</span>
-                    <span class="fw-bold">${{ number_format($total, 2) }}</span>
-                </div>
-                @php
-                $shipping = count($cart) > 0 ? 5.00 : 0;
-                $tax = $total * 0.10;
-                $grandTotal = $total + $shipping + $tax;
-                @endphp
-                <div class="d-flex justify-content-between mb-3">
-                    <span>Shipping</span>
-                    <span class="fw-bold">${{ number_format($shipping, 2) }}</span>
-                </div>
-                <div class="d-flex justify-content-between mb-3">
-                    <span>Tax (10%)</span>
-                    <span class="fw-bold">${{ number_format($tax, 2) }}</span>
-                </div>
-                <hr />
-                <div class="d-flex justify-content-between mb-4">
-                    <span class="fw-bold">Total</span>
-                    <span class="fw-bold text-success h4 mb-0">${{ number_format($grandTotal, 2) }}</span>
-                </div>
-
-                <!-- Promo Code -->
-                <div class="mb-4">
-                    <label class="form-label">Promo Code</label>
-                    <div class="input-group">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Enter code" />
-                        <button class="btn btn-success" type="button">Apply</button>
-                    </div>
-                </div>
-
-                <!-- Checkout Button -->
-                @if(count($cart) > 0)
-                <a href="{{ route('checkout') }}" class="btn btn-success w-100 mb-3">
-                    <i class="fas fa-lock me-2"></i>Proceed to Checkout
-                </a>
-                @endif
-                </button>
-
-                <!-- Payment Methods -->
-                <div class="text-center mt-3">
-                    <small class="text-muted">We Accept:</small>
-                    <div class="mt-2">
-                        <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
-                        <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
-                        <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
-                        <i class="fab fa-cc-paypal fa-2x text-muted"></i>
-                    </div>
                 </div>
             </div>
+
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-4">Order Summary</h4>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Subtotal</span>
+                            <span class="fw-bold">LKR {{ number_format($total, 2) }}</span>
+                        </div>
+                        @php
+                        $shipping = count($cart) > 0 ? 5.00 : 0;
+                        $tax = $total * 0.10;
+                        $grandTotal = $total + $shipping + $tax;
+                        @endphp
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Shipping</span>
+                            <span class="fw-bold">LKR {{ number_format($shipping, 2) }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Tax (10%)</span>
+                            <span class="fw-bold">LKR {{ number_format($tax, 2) }}</span>
+                        </div>
+                        <hr />
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="fw-bold">Total</span>
+                            <span class="fw-bold text-success h4 mb-0">LKR {{ number_format($grandTotal, 2) }}</span>
+                        </div>
+
+                        <!-- Promo Code -->
+                        <div class="mb-4">
+                            <label class="form-label">Promo Code</label>
+                            <div class="input-group">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Enter code" />
+                                <button class="btn btn-success" type="button">Apply</button>
+                            </div>
+                        </div>
+
+                        <!-- Checkout Button -->
+                        @if(count($cart) > 0)
+                        <a href="{{ route('checkout') }}" class="btn btn-success w-100 mb-3">
+                            <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                        </a>
+                        @endif
+
+                        <!-- Payment Methods -->
+                        <div class="text-center mt-3">
+                            <small class="text-muted">We Accept:</small>
+                            <div class="mt-2">
+                                <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
+                                <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
+                                <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
+                                <i class="fab fa-cc-paypal fa-2x text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
 </section>
 @endsection

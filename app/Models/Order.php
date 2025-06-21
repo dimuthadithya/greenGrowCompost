@@ -10,23 +10,30 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Order extends Model
 {
     use HasFactory;
+
     protected $fillable = [
-        'order_number',
         'user_id',
+        'address_id',
         'status',
-        'total_amount',
-        'shipping_address',
-        'shipping_city',
-        'shipping_state',
-        'shipping_postal_code',
-        'shipping_phone',
-        'notes'
+        'subtotal',
+        'tax',
+        'shipping',
+        'total'
     ];
+
     protected $casts = [
-        'shipped_at' => 'datetime',
-        'delivered_at' => 'datetime',
-        'total_amount' => 'decimal:2'
+        'subtotal' => 'decimal:2',
+        'tax' => 'decimal:2',
+        'shipping' => 'decimal:2',
+        'total' => 'decimal:2'
     ];
+
+    protected $appends = ['order_number'];
+
+    public function getOrderNumberAttribute()
+    {
+        return 'GGC' . str_pad($this->id, 8, '0', STR_PAD_LEFT);
+    }
 
     /**
      * Get the user that owns the order.
@@ -35,6 +42,15 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the shipping address for the order.
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
     /**
      * Get the items for the order.
      */
@@ -42,6 +58,7 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
     /**
      * Get the items summary for display.
      */
@@ -71,6 +88,22 @@ class Order extends Model
         })
             ->filter()
             ->implode(', ');
+    }
+
+    /**
+     * Get the total amount for the order.
+     */
+    public function getTotalAmountAttribute()
+    {
+        if ($this->total) {
+            return $this->total;
+        }
+
+        $total = 0;
+        foreach ($this->items as $item) {
+            $total += $item->quantity * $item->unit_price;
+        }
+        return $total;
     }
 
     /**

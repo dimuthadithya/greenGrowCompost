@@ -31,4 +31,12 @@ class ProductController extends Controller
     {
         return view('productdetails', compact('product'));
     }
+
+    private function truncateDescription($description, $length = 100)
+    {
+        if (strlen($description) <= $length) {
+            return $description;
+        }
+        return substr($description, 0, $length) . '...';
+    }
 }

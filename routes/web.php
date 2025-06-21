@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
@@ -40,7 +41,8 @@ Route::controller(CartController::class)->group(function () {
 });
 
 Route::get('/order/{id}', function ($id) {
-    return view('orderdeatils', ['order' => $id]);
+    $order = \App\Models\Order::with(['items.product', 'address'])->findOrFail($id);
+    return view('orderdetails', ['order' => $order]);
 })->name('order.details');
 
 
@@ -80,8 +82,17 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 });
 
 // Checkout Routes
-Route::get('/checkout', function () {
-    return view('checkout');
-})->name('checkout');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/order/confirmation/{order}', function ($order) {
+        return view('order.confirmation', compact('order'));
+    })->name('order.confirmation');
+});
+
+// Order Confirmation Route
+Route::get('/order/confirmation/{order}', function ($order) {
+    return view('order.confirmation', compact('order'));
+})->name('order.confirmation');
 
 require __DIR__ . '/auth.php';

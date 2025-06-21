@@ -13,18 +13,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_number')->unique();
             $table->foreignId('user_id')->constrained();
-            $table->decimal('total_amount', 10, 2);
+            $table->foreignId('address_id')->constrained();
+            $table->decimal('subtotal', 10, 2);
+            $table->decimal('tax', 10, 2);
+            $table->decimal('shipping', 10, 2);
+            $table->decimal('total', 10, 2);
             $table->enum('status', ['pending', 'processing', 'shipped', 'delivered', 'cancelled'])->default('pending');
-            $table->string('shipping_address');
-            $table->string('shipping_city');
-            $table->string('shipping_state');
-            $table->string('shipping_postal_code');
-            $table->string('shipping_phone');
-            $table->text('notes')->nullable();
-            $table->timestamp('shipped_at')->nullable();
-            $table->timestamp('delivered_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

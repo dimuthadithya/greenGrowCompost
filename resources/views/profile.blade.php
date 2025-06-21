@@ -148,7 +148,7 @@
                                                         {{ ucfirst($order->status) }}
                                                     </span>
                                                 </td>
-                                                <td>Rs. {{ number_format($order->total_amount, 2) }}</td>
+                                                <td>Rs. {{ number_format($order->total_amount ?? 0, 2) }}</td>
                                                 <td>
                                                     <a href="{{ route('order.details', $order->id) }}" class="btn btn-sm btn-outline-success">View</a>
                                                 </td>
@@ -482,7 +482,7 @@
                     class="btn-close"
                     data-bs-dismiss="modal"></button>
             </div>
-            <form action="{{ route('addresses.update', '') }}" method="POST" id="editAddressForm">
+            <form action="{{ route('addresses.update', 0) }}" method="POST" id="editAddressForm">
                 @csrf
                 @method('patch')
                 <div class="modal-body">
@@ -546,6 +546,7 @@
                         Save Changes
                     </button>
                 </div>
+            </form>
         </div>
     </div>
 </div>
@@ -641,7 +642,7 @@
                 const form = document.getElementById('editAddressForm');
 
                 // Update form action URL
-                form.action = form.action + '/' + addressId;
+                form.action = form.action.replace('/0', '/' + addressId);
 
                 // Set form values
                 form.querySelector('[name="label"]').value = this.dataset.label;

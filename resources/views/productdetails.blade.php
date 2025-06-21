@@ -5,6 +5,13 @@
 <!-- Product Details Section -->
 <section class="py-5 mt-5">
     <div class="container">
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+            <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -27,7 +34,7 @@
                     </span>
                     @endif
                     <img
-                        src="{{ $product->image_url ?? 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80' }}"
+                        src="{{ asset('storage/')."/".$product->image ?? '' }}"
                         alt="{{ $product->name }}"
                         class="img-fluid rounded-3" />
                 </div>
@@ -37,38 +44,53 @@
             <div class="col-md-6">
                 <h1 class="display-5 mb-3">{{ $product->name }}</h1>
                 <div class="stock-badge mb-3">
-                    <i class="fas fa-check me-1"></i>In Stock
+                    @if($product->stock_quantity > 0)
+                    <i class="fas fa-check me-1"></i>
+                    <span class="text-success">In Stock ({{ $product->stock_quantity }} bags available)</span>
+                    @else
+                    <i class="fas fa-times me-1"></i>
+                    <span class="text-danger">Out of Stock</span>
+                    @endif
                 </div>
 
                 <div class="price-section mb-4">
-                    <h2 class="text-success mb-3">Rs. {{ number_format($product->price) }}/Bag</h2>
-                    <p class="mb-2">Available in:</p>
-                    <div class="btn-group mb-3" role="group">
-                        <input
-                            type="radio"
-                            class="btn-check"
-                            name="size"
-                            id="size25"
-                            autocomplete="off"
-                            checked />
-                        <label class="btn btn-outline-success" for="size25">25kg Bag</label>
+                    <h2 class="text-success mb-3">Rs. {{ number_format($product->price) }}/{{ $product->weight }}{{ $product->unit }}</h2>
 
-                        <input
-                            type="radio"
-                            class="btn-check"
-                            name="size"
-                            id="size50"
-                            autocomplete="off" />
-                        <label class="btn btn-outline-success" for="size50">50kg Bag</label>
+                    @auth
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mb-4">
+                        @csrf
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">Quantity:</label>
+                            <div class="input-group" style="width: 200px;">
+                                <button type="button" class="btn btn-outline-secondary" onclick="decrementQuantity()">-</button>
+                                <input type="number" class="form-control text-center" id="quantity" name="quantity" value="1" min="1" max="{{ $product->stock_quantity }}" required>
+                                <button type="button" class="btn btn-outline-secondary" onclick="incrementQuantity()">+</button>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg" {{ $product->stock_quantity < 1 ? 'disabled' : '' }}>
+                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
+                            </button>
+                            <a href="{{ route('contact') }}" class="btn btn-outline-success">
+                                <i class="fas fa-phone me-2"></i>Contact for Bulk Orders
+                            </a>
+                        </div>
+                    </form>
+                    @else
+                    <div class="alert alert-info mb-4" role="alert">
+                        <h5 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Login Required</h5>
+                        <p class="mb-0">Please <a href="{{ route('login') }}" class="alert-link">login</a> or <a href="{{ route('register') }}" class="alert-link">register</a> to add products to your cart.</p>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-success btn-lg">
-                            <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-                        </button>
-                        <button class="btn btn-outline-success">
+                        <a href="{{ route('login') }}" class="btn btn-success btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login to Purchase
+                        </a>
+                        <a href="{{ route('contact') }}" class="btn btn-outline-success">
                             <i class="fas fa-phone me-2"></i>Contact for Bulk Orders
-                        </button>
+                        </a>
                     </div>
+                    @endauth
                 </div>
 
                 <div class="product-features mb-4">
