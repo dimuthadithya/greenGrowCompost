@@ -29,20 +29,34 @@ class Order extends Model
         'total' => 'decimal:2'
     ];
 
-    protected $appends = ['order_number'];
-
-    protected static function boot()
+    public static function generateUniqueOrderNumber()
     {
-        parent::boot();
+        return DB::transaction(function () {
+            // Lock the sequence record for update
+            $sequence = DB::table('order_sequences')
+                ->lockForUpdate()
+                ->first();
 
-        static::creating(function ($order) {
-            if (!$order->order_number) {
-                $latestOrder = static::latest()->first();
-                $number = $latestOrder ? intval(substr($latestOrder->order_number, 3)) + 1 : 1;
-                $order->order_number = 'GGC' . str_pad($number, 8, '0', STR_PAD_LEFT);
+            if (!$sequence) {
+                throw new \RuntimeException('Order sequence not initialized');
             }
+
+            // Get and increment the next value
+            $nextValue = $sequence->next_value;
+
+            DB::table('order_sequences')
+                ->where('id', $sequence->id)
+                ->update([
+                    'next_value' => $nextValue + 1,
+                    'updated_at' => now()
+                ]);
+
+            // Format and return the order number
+            return 'GGC' . str_pad($nextValue, 8, '0', STR_PAD_LEFT);
         });
     }
+
+    // Boot has been removed as it's not needed anymore since we're handling order numbers explicitly
 
     /**
      * Get the user that owns the order.
