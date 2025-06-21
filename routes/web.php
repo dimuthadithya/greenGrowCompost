@@ -32,14 +32,7 @@ Route::get('/order/{id}', function ($id) {
     return view('orderdeatils', ['order' => $id]);
 })->name('order.details');
 
-// Static Pages
-Route::view('/contact', 'contact')->name('contact');
-Route::view('/faq', 'faq')->name('faq');
-Route::view('/shipping', 'shipping')->name('shipping');
-Route::view('/returns', 'returns')->name('returns');
-Route::view('/privacy', 'privacy')->name('privacy');
-Route::view('/terms', 'terms')->name('terms');
-Route::view('/refund', 'refund')->name('refund');
+
 
 // Authentication & Profile Routes
 Route::middleware(['auth'])->group(function () {
@@ -50,6 +43,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Admin Routes
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Products Management
+    Route::resource('products', ProductController::class);
+
+    // Orders Management
+    Route::resource('orders', OrderController::class);
+
+    // Customers Management
+    Route::resource('customers', CustomerController::class);
+
+    // Contact Messages Management
+    Route::resource('contact', ContactController::class)->only(['index', 'show', 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
