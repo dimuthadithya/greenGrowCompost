@@ -33,6 +33,11 @@ Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
 
+Route::post('/cart/add/{product}', function (App\Models\Product $product) {
+    // TODO: Implement cart functionality
+    return redirect()->back()->with('success', 'Product added to cart');
+})->name('cart.add');
+
 Route::get('/order/{id}', function ($id) {
     return view('orderdeatils', ['order' => $id]);
 })->name('order.details');
