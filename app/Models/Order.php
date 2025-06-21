@@ -34,6 +34,15 @@ class Order extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the shipping address for the order.
+     */
+    public function address(): BelongsTo
+    {
+        return $this->belongsTo(Address::class);
+    }
+
     /**
      * Get the items for the order.
      */
@@ -41,6 +50,7 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
     /**
      * Get the items summary for display.
      */
