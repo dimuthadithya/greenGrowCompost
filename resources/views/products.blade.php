@@ -53,9 +53,10 @@
                 <div class="card product-card h-100 border-0 shadow-sm">
                     <div class="position-relative">
                         <img
-                            src="{{ $product->image_url ?? 'https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80' }}"
+                            src="{{ asset("storage/")."/".$product->image ?? '' }}"
                             alt="{{ $product->name }}"
-                            class="card-img-top" />
+                            class="card-img-top"
+                            style="height: 250px; object-fit: cover;" />
                         @if($product->is_featured)
                         <span class="product-badge">Best Seller</span>
                         @endif
@@ -63,7 +64,7 @@
                     <div class="card-body p-4">
                         <h3 class="h4 text-success">{{ $product->name }}</h3>
                         <p class="text-muted">
-                            {{ $product->description }}
+                            {{ \Illuminate\Support\Str::limit($product->description, 100) }}
                         </p>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="h4 mb-0 text-success">Rs. {{ number_format($product->price) }}</span>
