@@ -12,7 +12,7 @@ class OrderSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = User::where('role', 'user')->get();
+        $users = User::where('role', 'customer')->get();
         $products = Product::all();
 
         // Create 20 orders

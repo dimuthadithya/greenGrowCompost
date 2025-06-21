@@ -16,11 +16,9 @@ class UserSeeder extends Seeder
             'email' => 'admin@greengrow.com',
             'password' => Hash::make('password'),
             'role' => 'admin',
-        ]);
-
-        // Create normal users
+        ]);        // Create customer users
         User::factory(10)->create([
-            'role' => 'user',
+            'role' => 'customer',
         ]);
     }
 }

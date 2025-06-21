@@ -12,7 +12,7 @@ class ProductReviewSeeder extends Seeder
     public function run(): void
     {
         $products = Product::all();
-        $users = User::where('role', 'user')->get();
+        $users = User::where('role', 'customer')->get();
 
         foreach ($products as $product) {
             // Create 3-5 reviews for each product
