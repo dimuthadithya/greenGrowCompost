@@ -8,7 +8,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html" class="text-decoration-none">Home</a>
+                    <a href="{{ route('home') }}" class="text-decoration-none">Home</a>
                 </li>
                 <li class="breadcrumb-item active">My Profile</li>
             </ol>
@@ -21,13 +21,13 @@
                     <div class="card-body text-center">
                         <div class="profile-image mb-3">
                             <img
-                                src="https://ui-avatars.com/api/?name=John+Doe&background=198754&color=fff"
-                                alt="John Doe"
+                                src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name) }}&background=198754&color=fff"
+                                alt="{{ Auth::user()->name }}"
                                 class="rounded-circle" />
                         </div>
-                        <h5 class="card-title mb-1">John Doe</h5>
-                        <p class="text-muted small mb-3">Member since June 2025</p>
-                        <button class="btn btn-success btn-sm">
+                        <h5 class="card-title mb-1">{{ Auth::user()->name }}</h5>
+                        <p class="text-muted small mb-3">Member since {{ Auth::user()->created_at->format('F Y') }}</p>
+                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editProfileModal">
                             <i class="fas fa-edit me-1"></i>Edit Profile
                         </button>
                     </div>
@@ -69,7 +69,7 @@
                                             <input
                                                 type="text"
                                                 class="form-control"
-                                                value="John Doe"
+                                                value="{{ Auth::user()->name }}"
                                                 readonly />
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                             <input
                                                 type="email"
                                                 class="form-control"
-                                                value="john.doe@example.com"
+                                                value="{{ Auth::user()->email }}"
                                                 readonly />
                                         </div>
                                     </div>
@@ -508,4 +508,83 @@
     </div>
 </div>
 
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('profile.update') }}" method="POST">
+                @csrf
+                @method('patch')
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" name="name" value="{{ Auth::user()->name }}" required />
+                        @error('name')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" required />
+                        @error('email')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">Delete Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('profile.destroy') }}" method="POST">
+                @csrf
+                @method('delete')
+                <div class="modal-body">
+                    <p class="mb-3">Are you sure you want to delete your account? This action cannot be undone.</p>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" required placeholder="Enter your password to confirm" />
+                        @error('password', 'userDeletion')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (session('status') === 'profile-updated')
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <strong class="me-auto text-success">Success</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+        </div>
+        <div class="toast-body">
+            Profile updated successfully!
+        </div>
+    </div>
+</div>
+@endif
 @endsection
