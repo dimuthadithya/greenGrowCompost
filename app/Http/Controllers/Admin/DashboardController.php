@@ -14,18 +14,18 @@ class DashboardController extends Controller
     {
         // Get statistics
         $totalOrders = Order::count();
-        $totalRevenue = Order::sum('total');
-        $totalCustomers = User::where('is_admin', false)->count();
+        $totalRevenue = Order::sum('total_amount');
+        $totalCustomers = User::where('role', 'customer')->count();
         $totalProducts = Product::count();
 
         // Calculate increases
         $lastMonthOrders = Order::whereMonth('created_at', now()->subMonth())->count();
         $orderIncrease = $lastMonthOrders > 0 ? round(($totalOrders - $lastMonthOrders) / $lastMonthOrders * 100) : 0;
 
-        $lastMonthRevenue = Order::whereMonth('created_at', now()->subMonth())->sum('total');
+        $lastMonthRevenue = Order::whereMonth('created_at', now()->subMonth())->sum('total_amount');
         $revenueIncrease = $lastMonthRevenue > 0 ? round(($totalRevenue - $lastMonthRevenue) / $lastMonthRevenue * 100) : 0;
 
-        $newCustomers = User::where('is_admin', false)
+        $newCustomers = User::where('role', 'customer')
             ->whereMonth('created_at', now())
             ->count();
 
@@ -33,15 +33,8 @@ class DashboardController extends Controller
             ->count();
 
         // Get recent orders
-        $recentOrders = Order::with('customer')
+        $recentOrders = Order::with('user')
             ->latest()
-            ->take(10)
-            ->get();
-
-        // Get low stock products
-        $lowStockProducts = Product::with('category')
-            ->where('stock', '<=', 15)
-            ->orderBy('stock')
             ->take(10)
             ->get();
 
@@ -54,8 +47,7 @@ class DashboardController extends Controller
             'revenueIncrease',
             'newCustomers',
             'newProducts',
-            'recentOrders',
-            'lowStockProducts'
+            'recentOrders'
         ));
     }
 }
