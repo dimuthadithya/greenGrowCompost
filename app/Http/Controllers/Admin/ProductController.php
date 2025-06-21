@@ -113,10 +113,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // Delete the product image from storage if it exists
         if ($product->image) {
             Storage::disk('public')->delete($product->image);
         }
 
+        // Delete the product
         $product->delete();
 
         return redirect()->route('admin.products.index')

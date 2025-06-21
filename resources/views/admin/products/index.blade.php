@@ -40,8 +40,8 @@
                 <td>{{ $product->category->name }}</td>
                 <td>${{ number_format($product->price, 2) }}</td>
                 <td>
-                    <span class="badge bg-{{ $product->stock <= 5 ? 'danger' : ($product->stock <= 15 ? 'warning' : 'success') }}">
-                        {{ $product->stock }} units
+                    <span class="badge bg-{{ $product->stock_quantity <= 5 ? 'danger' : ($product->stock_quantity <= 15 ? 'warning' : 'success') }}">
+                        {{ $product->stock_quantity }} units
                     </span>
                 </td>
                 <td>
