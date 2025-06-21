@@ -17,17 +17,17 @@
     <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/assets/images/favicon_io/apple-touch-icon.png" />
+        href="{{ asset("/assets/images/favicon_io/apple-touch-icon.png") }}" />
     <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/assets/images/favicon_io/favicon-32x32.png" />
+        href="{{ asset('assets/images/favicon_io/favicon-32x32.png') }}" />
     <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/assets/images/favicon_io/favicon-16x16.png" />
+        href="{{ asset('assets/images/favicon_io/favicon-16x16.png') }}" />
     <link rel="manifest" href="/assets/images/favicon_io/site.webmanifest" />
     <!-- Google Fonts -->
     <link
@@ -35,6 +35,7 @@
         rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
+    @stack('styles')
 </head>
 
 <body>
@@ -58,7 +59,8 @@
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script src="./assets/js/index.js"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
+    @stack('scripts')
 </body>
 
 </html>
