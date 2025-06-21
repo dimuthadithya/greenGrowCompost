@@ -70,37 +70,37 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="first_name" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name') }}" required>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name', 'John') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="last_name" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name', 'Doe') }}" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', Auth::user()->email) }}" required>
+                                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email', Auth::user()->email ?? 'bacuvinyz@mailinator.com') }}" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="address" class="form-label">Street Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" required>
+                                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address', '123 Test Street') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city" value="{{ old('city') }}" required>
+                                    <input type="text" class="form-control" id="city" name="city" value="{{ old('city', 'Test City') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="postal_code" class="form-label">Postal Code</label>
-                                    <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ old('postal_code') }}" required>
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ old('postal_code', '12345') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state" name="state" value="{{ old('state') }}" required>
+                                    <input type="text" class="form-control" id="state" name="state" value="{{ old('state', 'Test State') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="country" class="form-label">Country</label>
                                     <select class="form-select" id="country" name="country" required>
                                         <option value="">Choose...</option>
-                                        <option value="IN">India</option>
+                                        <option value="IN" selected>India</option>
                                         <option value="LK">Sri Lanka</option>
                                         <option value="NP">Nepal</option>
                                         <option value="BD">Bangladesh</option>
@@ -108,7 +108,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone', '1234567890') }}" required>
                                 </div>
                             </div>
                         </div>
