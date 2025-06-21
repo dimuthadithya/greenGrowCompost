@@ -26,23 +26,48 @@
     </div>
 </section>
 
-<!-- Featured Products Section -->
+<!-- Our Premium Compost Section -->
 <section class="py-16 bg-gray-50" id="products">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center">
-            <h2 class="text-3xl font-bold text-gray-900 mb-8">Featured Products</h2>
+    <div class="container">
+        <h2 class="text-center text-3xl font-bold text-green-600 mb-12">Our Premium Compost</h2>
+
+        <div class="row g-4">
+            <!-- 25kg Premium Compost -->
+            <div class="col-md-4">
+                <x-featured-product-card
+                    title="25kg Premium Compost"
+                    price="1,200"
+                    image="images/compost-bag.jpg"
+                    description="Perfect for small gardens and potted plants."
+                    :product-id="1"
+                    badge="Best Seller" />
+            </div>
+
+            <!-- 50kg Premium Compost -->
+            <div class="col-md-4">
+                <x-featured-product-card
+                    title="50kg Premium Compost"
+                    price="2,200"
+                    image="images/farm-workers.jpg"
+                    description="Ideal for medium-sized gardens and farms."
+                    :product-id="2"
+                    badge="Popular" />
+            </div>
+
+            <!-- Bulk Order -->
+            <div class="col-md-4">
+                <x-featured-product-card
+                    title="Bulk Order (100kg+)"
+                    price="4,000"
+                    image="images/farm-workers.jpg"
+                    description="For large farms and commercial agriculture."
+                    :product-id="3"
+                    badge="Bulk Order" />
+            </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"> @foreach($featuredProducts as $product)
-            <x-product-card
-                :title="$product->name"
-                :price="number_format($product->price, 2)"
-                :image="$product->image ?? 'images/default-product.jpg'"
-                :description="$product->description"
-                :product-id="$product->id" />
-            @endforeach
-        </div>
+
         <div class="text-center mt-8">
-            <a href="{{ route('products.index') }}" class="inline-flex items-center px-6 py-3 text-base font-medium text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+            <a href="{{ route('products.index') }}" class="btn btn-outline-success btn-lg">
                 View All Products
             </a>
         </div>

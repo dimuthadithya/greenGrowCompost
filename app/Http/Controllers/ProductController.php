@@ -16,13 +16,13 @@ class ProductController extends Controller
 
         return view('products.index', compact('products'));
     }
-
     public function home()
     {
+        // Featured products are specifically curated products
         $featuredProducts = Product::with('category')
             ->where('is_active', true)
-            ->latest()
-            ->take(8)
+            ->where('is_featured', true)
+            ->take(3)
             ->get();
 
         return view('welcome', compact('featuredProducts'));
