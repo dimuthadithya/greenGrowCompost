@@ -32,10 +32,10 @@
                         <tbody>
                             @foreach($order->items as $item)
                             <tr>
-                                <td>{{ $item->product->name }}</td>
-                                <td>${{ number_format($item->price, 2) }}</td>
-                                <td>{{ $item->quantity }}</td>
-                                <td class="text-end">${{ number_format($item->total, 2) }}</td>
+                                <td>{{ optional($item->product)->name ?? 'Product Removed' }}</td>
+                                <td>${{ number_format($item->price ?? 0, 2) }}</td>
+                                <td>{{ $item->quantity ?? 0 }}</td>
+                                <td class="text-end">${{ number_format(($item->price ?? 0) * ($item->quantity ?? 0), 2) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
