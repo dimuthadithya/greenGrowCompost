@@ -21,10 +21,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('home') }}#contact">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('track.order') ? 'active' : '' }}" href="{{ route('track.order') }}">Track Order</a>
-                </li>
                 @auth
+                @if(auth()->user()->role === 'admin')
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                        <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                    </a>
+                </li>
+                @endif
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('profile.*') ? 'active' : '' }}" href="{{ route('profile.edit') }}">
                         <i class="fas fa-user-circle me-1"></i>Profile
