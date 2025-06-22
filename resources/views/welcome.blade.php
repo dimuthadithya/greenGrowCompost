@@ -172,7 +172,7 @@
                             <i class="fas fa-phone fa-2x"></i>
                         </div>
                         <h3 class="h5 mb-2">Call Us</h3>
-                        <p class="text-muted">+1 (555) 123-4567</p>
+                        <p class="text-muted">077717277</p>
                     </div>
                     <div class="col-md-4">
                         <div class="text-success mb-3">
@@ -186,7 +186,7 @@
                             <i class="fas fa-location-dot fa-2x"></i>
                         </div>
                         <h3 class="h5 mb-2">Visit Us</h3>
-                        <p class="text-muted">123 Green Street<br>Eco City, EC 12345</p>
+                        <p class="text-muted">123 Green Street,Sri Lanka</p>
                     </div>
                 </div>
             </div>
