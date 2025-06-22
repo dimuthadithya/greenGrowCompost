@@ -131,50 +131,27 @@
     <div class="container py-5">
         <h2 class="display-5 text-success text-center mb-5">Featured Products</h2>
         <div class="row g-4">
-            <!-- Product 1 -->
+            @forelse($featuredProducts as $product)
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 border-0 shadow-sm product-card">
-                    <img src="https://via.placeholder.com/400x300?text=Premium+Compost" class="card-img-top" alt="Premium Compost">
+                    <img src="{{ $product->image_url ?? 'https://via.placeholder.com/400x300?text=' . urlencode($product->name) }}"
+                        class="card-img-top"
+                        alt="{{ $product->name }}">
                     <div class="card-body p-4">
-                        <h3 class="h5 mb-3">Premium Garden Compost</h3>
-                        <p class="text-muted mb-3">High-quality organic compost perfect for gardens and landscaping.</p>
+                        <h3 class="h5 mb-3">{{ $product->name }}</h3>
+                        <p class="text-muted mb-3">{{ Str::limit($product->description, 100) }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <span class="h5 mb-0">$19.99</span>
-                            <a href="{{ route('products.show', 1) }}" class="btn btn-outline-success">View Details</a>
+                            <span class="h5 mb-0">${{ number_format($product->price, 2) }}</span>
+                            <a href="{{ route('products.show', $product) }}" class="btn btn-outline-success">View Details</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Product 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm product-card">
-                    <img src="https://via.placeholder.com/400x300?text=Plant+Nutrition" class="card-img-top" alt="Plant Nutrition Mix">
-                    <div class="card-body p-4">
-                        <h3 class="h5 mb-3">Plant Nutrition Mix</h3>
-                        <p class="text-muted mb-3">Specialized blend for optimal plant growth and development.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="h5 mb-0">$24.99</span>
-                            <a href="{{ route('products.show', 2) }}" class="btn btn-outline-success">View Details</a>
-                        </div>
-                    </div>
-                </div>
+            @empty
+            <div class="col-12 text-center">
+                <p class="text-muted">No featured products available at the moment.</p>
             </div>
-
-            <!-- Product 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 border-0 shadow-sm product-card">
-                    <img src="https://via.placeholder.com/400x300?text=Soil+Enhancer" class="card-img-top" alt="Soil Enhancer">
-                    <div class="card-body p-4">
-                        <h3 class="h5 mb-3">Soil Enhancer Plus</h3>
-                        <p class="text-muted mb-3">Advanced formula to improve soil structure and fertility.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="h5 mb-0">$29.99</span>
-                            <a href="{{ route('products.show', 3) }}" class="btn btn-outline-success">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
         <div class="text-center mt-5">
             <a href="{{ route('products.index') }}" class="btn btn-success btn-lg">View All Products</a>
