@@ -8,6 +8,16 @@ GreenGrow Compost is a modern e-commerce platform specializing in organic fertil
 
 ### Customer Features
 
+-   **Authentication**
+
+    -   Secure user registration
+    -   Login with email and password
+    -   Password reset functionality
+    -   Remember me option
+
+    ![Login Page](public/assets/images/readme/login.png)
+    ![Register Page](public/assets/images/readme/register.png)
+
 -   **Product Browsing & Search**
 
     -   Browse through a wide range of organic fertilizers
