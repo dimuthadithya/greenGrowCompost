@@ -1,20 +1,17 @@
 @extends('layouts.app')
-@section('title', 'GreenGrow Compost - Organic Fertilizer')
-@section('content')
 
+@section('title', 'GreenGrow Compost - Organic Fertilizer')
+
+@section('content')
 <!-- Hero Section -->
 <section class="hero-section py-5 text-white position-relative">
     <div class="container mt-5 text-center">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h1 class="display-3 fw-bold mb-4">Premium Organic Compost</h1>
-                <p class="lead fs-3 mb-5">
-                    Natural. Sustainable. Powerful. Transform your garden with our
-                    100% organic compost fertilizer.
-                </p>
-                <div
-                    class="d-flex flex-column flex-sm-row justify-content-center gap-3">
-                    <a href="#products" class="btn btn-success btn-lg px-4">
+                <p class="lead fs-3 mb-5">Natural. Sustainable. Powerful. Transform your garden with our 100% organic compost fertilizer.</p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                    <a href="{{ route('products.index') }}" class="btn btn-success btn-lg px-4">
                         <i class="fas fa-shopping-cart me-2"></i>Shop Now
                     </a>
                     <a href="#contact" class="btn btn-outline-light btn-lg px-4">
@@ -26,60 +23,10 @@
     </div>
 </section>
 
-<!-- Our Premium Compost Section -->
-<section class="py-16 bg-gray-50" id="products">
-    <div class="container">
-        <h2 class="text-center text-3xl font-bold text-green-600 mb-12">Our Premium Compost</h2>
-
-        <div class="row g-4">
-            <!-- 25kg Premium Compost -->
-            <div class="col-md-4">
-                <x-featured-product-card
-                    title="25kg Premium Compost"
-                    price="1,200"
-                    image="images/compost-bag.jpg"
-                    description="Perfect for small gardens and potted plants."
-                    :product-id="1"
-                    badge="Best Seller" />
-            </div>
-
-            <!-- 50kg Premium Compost -->
-            <div class="col-md-4">
-                <x-featured-product-card
-                    title="50kg Premium Compost"
-                    price="2,200"
-                    image="images/farm-workers.jpg"
-                    description="Ideal for medium-sized gardens and farms."
-                    :product-id="2"
-                    badge="Popular" />
-            </div>
-
-            <!-- Bulk Order -->
-            <div class="col-md-4">
-                <x-featured-product-card
-                    title="Bulk Order (100kg+)"
-                    price="4,000"
-                    image="images/farm-workers.jpg"
-                    description="For large farms and commercial agriculture."
-                    :product-id="3"
-                    badge="Bulk Order" />
-            </div>
-        </div>
-
-        <div class="text-center mt-8">
-            <a href="{{ route('products.index') }}" class="btn btn-outline-success btn-lg">
-                View All Products
-            </a>
-        </div>
-    </div>
-</section>
-
 <!-- Features Section -->
 <section class="py-5 bg-light">
     <div class="container py-5">
-        <h2 class="display-5 text-success text-center mb-5">
-            Why Choose Our Compost?
-        </h2>
+        <h2 class="display-5 text-success text-center mb-5">Why Choose Our Compost?</h2>
         <div class="row g-4">
             <!-- Feature 1 -->
             <div class="col-md-6 col-lg-3">
@@ -89,10 +36,7 @@
                             <i class="fas fa-recycle fa-3x"></i>
                         </div>
                         <h3 class="h4 mb-3 text-success">Organic & Chemical-Free</h3>
-                        <p class="text-muted">
-                            100% natural compost made from biodegradable waste with no
-                            harmful chemicals.
-                        </p>
+                        <p class="text-muted">100% natural compost made from biodegradable waste with no harmful chemicals.</p>
                     </div>
                 </div>
             </div>
@@ -105,10 +49,7 @@
                             <i class="fas fa-seedling fa-3x"></i>
                         </div>
                         <h3 class="h4 mb-3 text-success">Enriches Soil</h3>
-                        <p class="text-muted">
-                            Improves soil structure and provides essential nutrients for
-                            healthy plant growth.
-                        </p>
+                        <p class="text-muted">Improves soil structure and provides essential nutrients for healthy plant growth.</p>
                     </div>
                 </div>
             </div>
@@ -121,10 +62,7 @@
                             <i class="fas fa-globe-asia fa-3x"></i>
                         </div>
                         <h3 class="h4 mb-3 text-success">Eco-Friendly</h3>
-                        <p class="text-muted">
-                            Sustainable solution that reduces waste and helps protect our
-                            environment.
-                        </p>
+                        <p class="text-muted">Sustainable solution that reduces waste and helps protect our environment.</p>
                     </div>
                 </div>
             </div>
@@ -137,44 +75,72 @@
                             <i class="fas fa-chart-line fa-3x"></i>
                         </div>
                         <h3 class="h4 mb-3 text-success">Boosts Yield</h3>
-                        <p class="text-muted">
-                            Increases crop productivity and improves the quality of your
-                            harvest.
-                        </p>
+                        <p class="text-muted">Increases crop productivity and improves the quality of your harvest.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Products Section -->
-<section id="products" class="py-5 bg-light">
+
+<!-- About Section -->
+<section id="about" class="py-5">
     <div class="container py-5">
-        <h2 class="display-5 text-success text-center mb-5">
-            Our Premium Compost
-        </h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="https://via.placeholder.com/600x400?text=About+Us" class="img-fluid rounded shadow" alt="About GreenGrow">
+            </div>
+            <div class="col-lg-6">
+                <h2 class="display-5 text-success mb-4">About GreenGrow</h2>
+                <p class="lead mb-4">At GreenGrow, we're passionate about sustainable agriculture and helping you grow healthier, more productive plants naturally.</p>
+                <p class="text-muted mb-4">Founded in 2020, GreenGrow has been at the forefront of organic composting technology. We transform organic waste into premium quality compost, contributing to a more sustainable future while helping gardens thrive.</p>
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <div class="text-success me-3">
+                                <i class="fas fa-check-circle fa-2x"></i>
+                            </div>
+                            <div>
+                                <h4 class="h5 mb-1">100% Organic</h4>
+                                <p class="text-muted mb-0">No artificial additives</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="d-flex align-items-center">
+                            <div class="text-success me-3">
+                                <i class="fas fa-award fa-2x"></i>
+                            </div>
+                            <div>
+                                <h4 class="h5 mb-1">Certified Quality</h4>
+                                <p class="text-muted mb-0">ISO 9001 certified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ route('products.index') }}" class="btn btn-success btn-lg">
+                    <i class="fas fa-leaf me-2"></i>Explore Our Products
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="py-5">
+    <div class="container py-5">
+        <h2 class="display-5 text-success text-center mb-5">Featured Products</h2>
         <div class="row g-4">
             <!-- Product 1 -->
             <div class="col-md-6 col-lg-4">
-                <div class="card product-card h-100 border-0 shadow-sm">
-                    <div class="position-relative">
-                        <img
-                            src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
-                            alt="Compost Bag"
-                            class="card-img-top" />
-                        <span class="product-badge">Best Seller</span>
-                    </div>
+                <div class="card h-100 border-0 shadow-sm product-card">
+                    <img src="https://via.placeholder.com/400x300?text=Premium+Compost" class="card-img-top" alt="Premium Compost">
                     <div class="card-body p-4">
-                        <h3 class="h4 text-success">25kg Premium Compost</h3>
-                        <p class="text-muted">
-                            Perfect for small gardens and potted plants.
-                        </p>
-                        <div
-                            class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="h4 mb-0 text-success">Rs. 1,200</span>
-                            <button class="btn btn-success">
-                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-                            </button>
+                        <h3 class="h5 mb-3">Premium Garden Compost</h3>
+                        <p class="text-muted mb-3">High-quality organic compost perfect for gardens and landscaping.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 mb-0">$19.99</span>
+                            <a href="{{ route('products.show', 1) }}" class="btn btn-outline-success">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -182,25 +148,14 @@
 
             <!-- Product 2 -->
             <div class="col-md-6 col-lg-4">
-                <div class="card product-card h-100 border-0 shadow-sm">
-                    <div class="position-relative">
-                        <img
-                            src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
-                            alt="Compost Bag"
-                            class="card-img-top" />
-                        <span class="product-badge">Popular</span>
-                    </div>
+                <div class="card h-100 border-0 shadow-sm product-card">
+                    <img src="https://via.placeholder.com/400x300?text=Plant+Nutrition" class="card-img-top" alt="Plant Nutrition Mix">
                     <div class="card-body p-4">
-                        <h3 class="h4 text-success">50kg Premium Compost</h3>
-                        <p class="text-muted">
-                            Ideal for medium-sized gardens and farms.
-                        </p>
-                        <div
-                            class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="h4 mb-0 text-success">Rs. 2,200</span>
-                            <button class="btn btn-success">
-                                <i class="fas fa-shopping-cart me-2"></i>Add to Cart
-                            </button>
+                        <h3 class="h5 mb-3">Plant Nutrition Mix</h3>
+                        <p class="text-muted mb-3">Specialized blend for optimal plant growth and development.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 mb-0">$24.99</span>
+                            <a href="{{ route('products.show', 2) }}" class="btn btn-outline-success">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -208,307 +163,55 @@
 
             <!-- Product 3 -->
             <div class="col-md-6 col-lg-4">
-                <div class="card product-card h-100 border-0 shadow-sm">
-                    <div class="position-relative">
-                        <img
-                            src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
-                            alt="Bulk Compost"
-                            class="card-img-top" />
-                        <span class="product-badge">Bulk Order</span>
-                    </div>
+                <div class="card h-100 border-0 shadow-sm product-card">
+                    <img src="https://via.placeholder.com/400x300?text=Soil+Enhancer" class="card-img-top" alt="Soil Enhancer">
                     <div class="card-body p-4">
-                        <h3 class="h4 text-success">Bulk Order (100kg+)</h3>
-                        <p class="text-muted">
-                            For large farms and commercial agriculture.
-                        </p>
-                        <div
-                            class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="h4 mb-0 text-success">Rs. 4,000</span>
-                            <button class="btn btn-success">
-                                <i class="fas fa-phone me-2"></i>Contact Us
-                            </button>
+                        <h3 class="h5 mb-3">Soil Enhancer Plus</h3>
+                        <p class="text-muted mb-3">Advanced formula to improve soil structure and fertility.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 mb-0">$29.99</span>
+                            <a href="{{ route('products.show', 3) }}" class="btn btn-outline-success">View Details</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-success btn-lg px-5">
-                <i class="fas fa-th-list me-2"></i>View All Products
-            </a>
-        </div>
-    </div>
-</section>
-<!-- Gallery Section -->
-<section id="gallery" class="py-5 bg-white">
-    <div class="container py-5">
-        <h2 class="display-5 text-success text-center mb-5">
-            Our Compost in Action
-        </h2>
-        <div class="row g-4">
-            <div class="col-sm-6 col-lg-3">
-                <div class="gallery-item shadow-sm">
-                    <img
-                        src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
-                        alt="Fresh Compost"
-                        class="img-fluid" />
-                    <div class="p-3 bg-light text-center">
-                        <p class="h6 text-success mb-0">Fresh Compost</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="gallery-item shadow-sm">
-                    <img
-                        src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
-                        alt="Packaged Bags"
-                        class="img-fluid" />
-                    <div class="p-3 bg-light text-center">
-                        <p class="h6 text-success mb-0">Packaged Bags</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="gallery-item shadow-sm">
-                    <img
-                        src="https://images.unsplash.com/photo-1599427303058-f04cbcf4756f?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1471&amp;q=80"
-                        alt="Garden Application"
-                        class="img-fluid" />
-                    <div class="p-3 bg-light text-center">
-                        <p class="h6 text-success mb-0">Garden Application</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3">
-                <div class="gallery-item shadow-sm">
-                    <img
-                        src="https://images.unsplash.com/photo-1605001017150-85d6b92eefb6?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
-                        alt="Healthy Plants"
-                        class="img-fluid" />
-                    <div class="p-3 bg-light text-center">
-                        <p class="h6 text-success mb-0">Healthy Plants</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Customer Reviews -->
-<section class="py-5 bg-light">
-    <div class="container py-5">
-        <h2 class="display-5 text-success text-center mb-5">
-            What Our Customers Say
-        </h2>
-        <div class="row g-4">
-            @forelse ($latestReviews as $review)
-            <!-- Review Card -->
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="testimonial-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="ms-3">
-                            <h4 class="h5 mb-1">{{ $review->user->name }}</h4>
-                            <div class="star-rating">
-                                @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <=$review->rating)
-                                    <i class="fas fa-star"></i>
-                                    @elseif ($i - 0.5 <= $review->rating)
-                                        <i class="fas fa-star-half-alt"></i>
-                                        @else
-                                        <i class="far fa-star"></i>
-                                        @endif
-                                        @endfor
-                            </div>
-                            <small class="text-muted">{{ $review->product->name }}</small>
-                        </div>
-                    </div>
-                    <p class="text-muted mb-0">
-                        "{{ $review->comment }}"
-                    </p>
-                    <small class="text-muted d-block mt-2">
-                        {{ $review->created_at->diffForHumans() }}
-                    </small>
-                </div>
-            </div>
-            @empty
-            <!-- If no reviews yet -->
-            <div class="col-12 text-center">
-                <p class="text-muted">No customer reviews yet. Be the first to share your experience!</p>
-            </div>
-            @endforelse
-        </div>
-    </div>
-</section>
-<!-- About Section -->
-<section id="about" class="py-5 bg-white">
-    <div class="container py-5">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-6">
-                <h2 class="display-5 text-success mb-4">About GreenGrow</h2>
-                <div class="border-start border-success border-4 ps-4 mb-4">
-                    <p class="lead text-muted">
-                        We are a Sri Lankan eco-conscious team committed to turning
-                        organic waste into rich, effective compost. Our mission is to
-                        provide farmers and gardeners with high-quality organic
-                        fertilizer while reducing environmental waste.
-                    </p>
-                </div>
-                <p class="text-muted mb-4">
-                    Our compost is carefully processed to ensure it's free from
-                    harmful chemicals and packed with nutrients that plants love. We
-                    believe in sustainable agriculture that works in harmony with
-                    nature.
-                </p>
-                <div class="mb-4">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-check-circle text-success me-3 h4 mb-0"></i>
-                        <p class="mb-0">100% Organic and Chemical-Free</p>
-                    </div>
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="fas fa-leaf text-success me-3 h4 mb-0"></i>
-                        <p class="mb-0">Rich in Essential Nutrients</p>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-heart text-success me-3 h4 mb-0"></i>
-                        <p class="mb-0">Made with Care for Nature</p>
-                    </div>
-                </div>
-                <a href="#" class="btn btn-success btn-lg px-4">
-                    <i class="fas fa-arrow-right me-2"></i>Learn More About Us
-                </a>
-            </div>
-            <div class="col-lg-6">
-                <div class="position-relative">
-                    <img
-                        src="https://images.unsplash.com/photo-1605001017150-85d6b92eefb6?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1470&amp;q=80"
-                        alt="About GreenGrow"
-                        class="img-fluid rounded-3 shadow-lg" />
-                    <div
-                        class="position-absolute bottom-0 end-0 bg-success text-white p-4 rounded-top-left">
-                        <h4 class="h5 mb-0">Trusted by</h4>
-                        <p class="mb-0">1000+ Farmers</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-5 bg-success text-white">
-    <div class="container py-4 text-center">
-        <h2 class="display-5 mb-4">Ready to Transform Your Garden?</h2>
-        <p class="lead mb-5 mx-auto" style="max-width: 700px">
-            Join hundreds of satisfied customers who have experienced the
-            GreenGrow difference.
-        </p>
-        <div
-            class="d-flex flex-column flex-sm-row justify-content-center gap-3">
-            <a
-                href="#products"
-                class="btn btn-light btn-lg px-5 fw-bold text-success">Shop Now</a>
-            <a href="#contact" class="btn btn-outline-light btn-lg px-5 fw-bold">Contact Us</a>
+            <a href="{{ route('products.index') }}" class="btn btn-success btn-lg">View All Products</a>
         </div>
     </div>
 </section>
 
 <!-- Contact Section -->
 <section id="contact" class="py-5 bg-light">
-    <div class="container py-4">
-        <h2 class="display-5 text-success text-center mb-5">Get In Touch</h2>
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <h3 class="h4 text-success mb-4">Contact Information</h3>
-                <div class="d-flex flex-column gap-4">
-                    <div class="d-flex">
-                        <i class="fas fa-map-marker-alt text-success mt-1 me-3"></i>
-                        <div>
-                            <h4 class="h6 fw-bold">Address</h4>
-                            <p class="text-muted">123 Green Street, Colombo, Sri Lanka</p>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="display-5 text-success mb-4">Get in Touch</h2>
+                <p class="lead text-muted mb-5">Have questions about our products? We're here to help!</p>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="text-success mb-3">
+                            <i class="fas fa-phone fa-2x"></i>
                         </div>
+                        <h3 class="h5 mb-2">Call Us</h3>
+                        <p class="text-muted">+1 (555) 123-4567</p>
                     </div>
-                    <div class="d-flex">
-                        <i class="fas fa-phone-alt text-success mt-1 me-3"></i>
-                        <div>
-                            <h4 class="h6 fw-bold">Phone</h4>
-                            <p class="text-muted">+94 77 123 4567</p>
+                    <div class="col-md-4">
+                        <div class="text-success mb-3">
+                            <i class="fas fa-envelope fa-2x"></i>
                         </div>
+                        <h3 class="h5 mb-2">Email Us</h3>
+                        <p class="text-muted">info@greengrow.com</p>
                     </div>
-                    <div class="d-flex">
-                        <i class="fas fa-envelope text-success mt-1 me-3"></i>
-                        <div>
-                            <h4 class="h6 fw-bold">Email</h4>
-                            <p class="text-muted">info@greengrow.lk</p>
+                    <div class="col-md-4">
+                        <div class="text-success mb-3">
+                            <i class="fas fa-location-dot fa-2x"></i>
                         </div>
-                    </div>
-                    <div class="d-flex">
-                        <i class="fas fa-clock text-success mt-1 me-3"></i>
-                        <div>
-                            <h4 class="h6 fw-bold">Business Hours</h4>
-                            <p class="text-muted">Monday - Saturday: 8:00 AM - 6:00 PM</p>
-                        </div>
+                        <h3 class="h5 mb-2">Visit Us</h3>
+                        <p class="text-muted">123 Green Street<br>Eco City, EC 12345</p>
                     </div>
                 </div>
-
-                <h3 class="h4 text-success mt-5 mb-4">Follow Us</h3>
-                <div class="d-flex gap-3">
-                    <a
-                        href="#"
-                        class="btn btn-success rounded-circle"
-                        style="width: 40px; height: 40px">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a
-                        href="#"
-                        class="btn btn-success rounded-circle"
-                        style="width: 40px; height: 40px">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a
-                        href="#"
-                        class="btn btn-success rounded-circle"
-                        style="width: 40px; height: 40px">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <a
-                        href="#"
-                        class="btn btn-success rounded-circle"
-                        style="width: 40px; height: 40px">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <h3 class="h4 text-success mb-4">Send Us a Message</h3>
-                <form>
-                    <div class="mb-3">
-                        <label for="name" class="form-label text-muted">Name</label>
-                        <input type="text" id="name" class="form-control" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label text-muted">Email</label>
-                        <input type="email" id="email" class="form-control" required />
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label text-muted">Phone</label>
-                        <input type="tel" id="phone" class="form-control" />
-                    </div>
-                    <div class="mb-4">
-                        <label for="message" class="form-label text-muted">Message</label>
-                        <textarea
-                            id="message"
-                            rows="4"
-                            class="form-control"
-                            required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100 py-3 fw-bold">
-                        Send Message
-                    </button>
-                </form>
             </div>
         </div>
     </div>
