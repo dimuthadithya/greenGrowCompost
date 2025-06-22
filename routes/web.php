@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ReviewController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CartController;
@@ -13,10 +14,19 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductReviewController;
 
+
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::get('/', [ProductController::class, 'home'])->name('home');
+
+// Legal Routes
+Route::view('/privacy-policy', 'legal.privacy')->name('privacy');
+Route::view('/terms-of-service', 'legal.terms')->name('terms');
+Route::view('/refund-policy', 'legal.refund')->name('refund');
+Route::view('/shipping-information', 'legal.shipping')->name('shipping');
+Route::view('/returns', 'legal.returns')->name('returns');
+Route::view('/faqs', 'legal.faqs')->name('faqs');
 
 // Public Contact Routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -95,9 +105,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::resource('contact', ContactController::class)->only(['index', 'show', 'destroy']);
 
     // Reviews Management
-    Route::get('reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('reviews.index');
-    Route::post('reviews/{review}/toggle', [\App\Http\Controllers\Admin\ReviewController::class, 'toggleApproval'])->name('reviews.toggle');
-    Route::delete('reviews/{review}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    Route::post('reviews/{review}/toggle', [ReviewController::class, 'toggleApproval'])->name('reviews.toggle');
+    Route::delete('reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 

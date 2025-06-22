@@ -50,11 +50,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.contact.*') ? 'active' : '' }}" href="{{ route('admin.contact.index') }}">
-                            <i class="fas fa-envelope me-2"></i>Contact
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}" href="{{ route('admin.reviews.index') }}">
                             <i class="fas fa-comments me-2"></i>Reviews
                         </a>
@@ -94,11 +89,6 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('admin.customers.*') ? 'active' : '' }}" href="{{ route('admin.customers.index') }}">
                                 <i class="fas fa-users me-2"></i> Customers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.contact.*') ? 'active' : '' }}" href="{{ route('admin.contact.index') }}">
-                                <i class="fas fa-envelope me-2"></i> Contact
                             </a>
                         </li>
                         <li class="nav-item">
