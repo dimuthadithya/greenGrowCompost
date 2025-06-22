@@ -18,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 // Public Routes
 Route::get('/', [ProductController::class, 'home'])->name('home');
 
+// Legal Routes
+Route::view('/privacy-policy', 'legal.privacy')->name('privacy');
+Route::view('/terms-of-service', 'legal.terms')->name('terms');
+Route::view('/refund-policy', 'legal.refund')->name('refund');
+Route::view('/shipping-information', 'legal.shipping')->name('shipping');
+Route::view('/returns', 'legal.returns')->name('returns');
+Route::view('/faqs', 'legal.faqs')->name('faqs');
+
 // Public Contact Routes
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
