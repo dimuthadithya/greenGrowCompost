@@ -62,20 +62,18 @@
                             </td>
                             <td>{{ $review->created_at->format('M d, Y') }}</td>
                             <td>
-                                <div class="btn-group" role="group">
-                                    <form action="{{ route('admin.reviews.toggle', $review) }}" method="POST" class="d-inline">
+                                <div class="d-flex gap-1">
+                                    <form action="{{ route('admin.reviews.toggle', $review) }}" method="POST">
                                         @csrf
-                                        <button type="submit" class="btn btn-sm btn-{{ $review->is_approved ? 'warning' : 'success' }}">
+                                        <button type="submit" class="btn btn-sm p-1 btn-{{ $review->is_approved ? 'warning' : 'success' }}" title="{{ $review->is_approved ? 'Disapprove' : 'Approve' }} this review">
                                             <i class="fas fa-{{ $review->is_approved ? 'times' : 'check' }}"></i>
-                                            {{ $review->is_approved ? 'Disapprove' : 'Approve' }}
                                         </button>
                                     </form>
-                                    <form action="{{ route('admin.reviews.destroy', $review) }}" method="POST" class="d-inline ms-1">
+                                    <form action="{{ route('admin.reviews.destroy', $review) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this review?')">
+                                        <button type="submit" class="btn btn-sm p-1 btn-danger" onclick="return confirm('Are you sure you want to delete this review?')" title="Delete this review">
                                             <i class="fas fa-trash"></i>
-                                            Delete
                                         </button>
                                     </form>
                                 </div>
@@ -88,9 +86,6 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
-            <div class="d-flex justify-content-center mt-4">
-                {{ $reviews->links() }}
             </div>
         </div>
     </div>

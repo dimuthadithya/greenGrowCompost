@@ -12,7 +12,7 @@ class ReviewController extends Controller
     {
         $reviews = ProductReview::with(['product', 'user'])
             ->latest()
-            ->paginate(10);
+            ->get();
 
         return view('admin.reviews.index', compact('reviews'));
     }
