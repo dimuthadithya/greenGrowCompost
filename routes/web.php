@@ -42,6 +42,12 @@ Route::controller(CartController::class)->group(function () {
     Route::delete('/cart/clear', 'clear')->name('cart.clear');
 });
 
+// Checkout Routes
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('/checkout', 'index')->name('checkout');
+    Route::post('/checkout', 'process')->name('checkout.process');
+});
+
 Route::get('/order/{id}', function ($id) {
     $order = \App\Models\Order::with(['items.product', 'address'])->findOrFail($id);
     return view('orderdetails', ['order' => $order]);
