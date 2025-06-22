@@ -44,12 +44,6 @@
                             data-bs-toggle="list">
                             <i class="fas fa-shopping-bag me-2"></i>My Orders
                         </a>
-                        <a
-                            href="#addresses"
-                            class="list-group-item list-group-item-action"
-                            data-bs-toggle="list">
-                            <i class="fas fa-map-marker-alt me-2"></i>My Addresses
-                        </a>
                     </div>
                 </div>
             </div>
@@ -270,84 +264,6 @@
                                             @endforelse
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Addresses Tab -->
-                    <div class="tab-pane fade" id="addresses">
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <div
-                                    class="d-flex justify-content-between align-items-center mb-4">
-                                    <h4 class="card-title mb-0">My Addresses</h4>
-                                    <button
-                                        class="btn btn-success"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#addAddressModal">
-                                        <i class="fas fa-plus me-1"></i>Add New Address
-                                    </button>
-                                </div>
-                                <div class="row g-4">
-                                    @forelse(Auth::user()->addresses as $address)
-                                    <div class="col-md-6">
-                                        <div class="card h-100">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between mb-2">
-                                                    <h5 class="card-title">{{ ucfirst($address->label) }}</h5>
-                                                    @if($address->is_default)
-                                                    <span class="badge bg-success">Default</span>
-                                                    @endif
-                                                </div>
-                                                <address class="mb-4">
-                                                    {{ $address->street_address }}<br />
-                                                    {{ $address->city }}<br />
-                                                    {{ $address->province }}<br />
-                                                    {{ $address->country }}<br />
-                                                    <strong>Phone:</strong> {{ $address->phone }}
-                                                </address>
-                                                <div class="btn-group btn-group-sm">
-                                                    <button
-                                                        class="btn btn-outline-success edit-address"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editAddressModal"
-                                                        data-address-id="{{ $address->id }}"
-                                                        data-label="{{ $address->label }}"
-                                                        data-street="{{ $address->street_address }}"
-                                                        data-city="{{ $address->city }}"
-                                                        data-province="{{ $address->province }}"
-                                                        data-country="{{ $address->country }}"
-                                                        data-phone="{{ $address->phone }}">
-                                                        Edit
-                                                    </button>
-                                                    <form action="{{ route('addresses.destroy', $address->id) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this address?')">
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                    @if(!$address->is_default)
-                                                    <form action="{{ route('addresses.default', $address->id) }}" method="POST" class="d-inline">
-                                                        @csrf
-                                                        @method('patch')
-                                                        <button type="submit" class="btn btn-outline-success">
-                                                            Set as Default
-                                                        </button>
-                                                    </form>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @empty
-                                    <div class="col-12">
-                                        <div class="alert alert-info">
-                                            You haven't added any addresses yet.
-                                        </div>
-                                    </div>
-                                    @endforelse
                                 </div>
                             </div>
                         </div>

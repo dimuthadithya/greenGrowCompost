@@ -49,13 +49,13 @@
                                 <p class="text-muted mb-0">LKR {{ number_format($item['price'], 2) }} each</p>
                             </div>
                             <div class="col-md-2 col-6">
-                                <form action="{{ route('cart.update', $id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('cart.update', $id) }}" method="POST" class="quantity-form d-inline">
                                     @csrf
                                     @method('PATCH')
                                     <div class="quantity-control d-flex align-items-center justify-content-center">
                                         <button
                                             type="button"
-                                            class="btn btn-sm btn-outline-secondary px-2 me-2"
+                                            class="btn btn-sm btn-outline-secondary px-2 me-2 quantity-btn"
                                             onclick="updateQuantity(this, -1)">
                                             <i class="fas fa-minus"></i>
                                         </button>
@@ -64,10 +64,11 @@
                                             name="quantity"
                                             class="form-control form-control-sm text-center quantity-input"
                                             value="{{ $item['quantity'] }}"
-                                            min="1" />
+                                            min="1"
+                                            aria-label="Product quantity" />
                                         <button
                                             type="button"
-                                            class="btn btn-sm btn-outline-secondary px-2 ms-2"
+                                            class="btn btn-sm btn-outline-secondary px-2 ms-2 quantity-btn"
                                             onclick="updateQuantity(this, 1)">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -140,40 +141,29 @@
                             <span class="fw-bold">Total</span>
                             <span class="fw-bold text-success h4 mb-0">LKR {{ number_format($grandTotal, 2) }}</span>
                         </div>
+                    </div>
 
-                        <!-- Promo Code -->
-                        <div class="mb-4">
-                            <label class="form-label">Promo Code</label>
-                            <div class="input-group">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Enter code" />
-                                <button class="btn btn-success" type="button">Apply</button>
-                            </div>
-                        </div>
+                    <!-- Checkout Button -->
+                    @if(count($cart) > 0)
+                    <a href="{{ route('checkout') }}" class="btn btn-success w-100 mb-3">
+                        <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                    </a>
+                    @endif
 
-                        <!-- Checkout Button -->
-                        @if(count($cart) > 0)
-                        <a href="{{ route('checkout') }}" class="btn btn-success w-100 mb-3">
-                            <i class="fas fa-lock me-2"></i>Proceed to Checkout
-                        </a>
-                        @endif
-
-                        <!-- Payment Methods -->
-                        <div class="text-center mt-3">
-                            <small class="text-muted">We Accept:</small>
-                            <div class="mt-2">
-                                <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
-                                <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
-                                <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
-                                <i class="fab fa-cc-paypal fa-2x text-muted"></i>
-                            </div>
+                    <!-- Payment Methods -->
+                    <div class="text-center mt-3">
+                        <small class="text-muted">We Accept:</small>
+                        <div class="mt-2">
+                            <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
+                            <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
+                            <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
+                            <i class="fab fa-cc-paypal fa-2x text-muted"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 @endsection
@@ -191,4 +181,6 @@
         }
     }
 </script>
-@endsection
+@push('scripts')
+<script src="{{ asset('assets/js/cart.js') }}"></script>
+@endpush
