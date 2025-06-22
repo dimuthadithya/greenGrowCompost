@@ -7,14 +7,52 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')
-            ->where('is_active', true)
-            ->latest()
-            ->paginate(12);
+        $query = Product::with('category')->where('is_active', true);
 
-        return view('products', compact('products'));
+        // Search by name or description
+        if ($request->filled('search')) {
+            $searchTerm = $request->search;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%")
+                    ->orWhere('description', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        // Filter by category
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
+
+        // Filter by price range
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+
+        // Sort products
+        $sortField = $request->sort ?? 'created_at';
+        $sortDirection = $request->direction ?? 'desc';
+
+        switch ($sortField) {
+            case 'price':
+                $query->orderBy('price', $sortDirection);
+                break;
+            case 'name':
+                $query->orderBy('name', $sortDirection);
+                break;
+            default:
+                $query->latest();
+                break;
+        }
+
+        $products = $query->paginate(12)->withQueryString();
+        $categories = \App\Models\ProductCategory::all();
+
+        return view('products', compact('products', 'categories'));
     }
     public function home()
     {
