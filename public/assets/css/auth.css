@@ -1,0 +1,94 @@
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.auth-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 450px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+    color: #2d5a27;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.auth-header p {
+    color: #6c757d;
+}
+
+.form-floating {
+    margin-bottom: 1rem;
+}
+
+.form-floating input {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 1rem;
+    height: auto;
+}
+
+.form-floating input:focus {
+    border-color: #2d5a27;
+    box-shadow: 0 0 0 0.2rem rgba(45, 90, 39, 0.25);
+}
+
+.form-floating label {
+    padding: 1rem;
+}
+
+.auth-remember-me {
+    display: flex;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.auth-remember-me input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.auth-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.auth-links a {
+    color: #2d5a27;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+.btn-login {
+    background-color: #2d5a27;
+    border: none;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.btn-login:hover {
+    background-color: #234420;
+}
