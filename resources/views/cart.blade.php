@@ -141,40 +141,29 @@
                             <span class="fw-bold">Total</span>
                             <span class="fw-bold text-success h4 mb-0">LKR {{ number_format($grandTotal, 2) }}</span>
                         </div>
+                    </div>
 
-                        <!-- Promo Code -->
-                        <div class="mb-4">
-                            <label class="form-label">Promo Code</label>
-                            <div class="input-group">
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Enter code" />
-                                <button class="btn btn-success" type="button">Apply</button>
-                            </div>
-                        </div>
+                    <!-- Checkout Button -->
+                    @if(count($cart) > 0)
+                    <a href="{{ route('checkout') }}" class="btn btn-success w-100 mb-3">
+                        <i class="fas fa-lock me-2"></i>Proceed to Checkout
+                    </a>
+                    @endif
 
-                        <!-- Checkout Button -->
-                        @if(count($cart) > 0)
-                        <a href="{{ route('checkout') }}" class="btn btn-success w-100 mb-3">
-                            <i class="fas fa-lock me-2"></i>Proceed to Checkout
-                        </a>
-                        @endif
-
-                        <!-- Payment Methods -->
-                        <div class="text-center mt-3">
-                            <small class="text-muted">We Accept:</small>
-                            <div class="mt-2">
-                                <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
-                                <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
-                                <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
-                                <i class="fab fa-cc-paypal fa-2x text-muted"></i>
-                            </div>
+                    <!-- Payment Methods -->
+                    <div class="text-center mt-3">
+                        <small class="text-muted">We Accept:</small>
+                        <div class="mt-2">
+                            <i class="fab fa-cc-visa fa-2x me-2 text-muted"></i>
+                            <i class="fab fa-cc-mastercard fa-2x me-2 text-muted"></i>
+                            <i class="fab fa-cc-amex fa-2x me-2 text-muted"></i>
+                            <i class="fab fa-cc-paypal fa-2x text-muted"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 @endsection
