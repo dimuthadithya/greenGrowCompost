@@ -49,13 +49,13 @@
                                 <p class="text-muted mb-0">LKR {{ number_format($item['price'], 2) }} each</p>
                             </div>
                             <div class="col-md-2 col-6">
-                                <form action="{{ route('cart.update', $id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('cart.update', $id) }}" method="POST" class="quantity-form d-inline">
                                     @csrf
                                     @method('PATCH')
                                     <div class="quantity-control d-flex align-items-center justify-content-center">
                                         <button
                                             type="button"
-                                            class="btn btn-sm btn-outline-secondary px-2 me-2"
+                                            class="btn btn-sm btn-outline-secondary px-2 me-2 quantity-btn"
                                             onclick="updateQuantity(this, -1)">
                                             <i class="fas fa-minus"></i>
                                         </button>
@@ -64,10 +64,11 @@
                                             name="quantity"
                                             class="form-control form-control-sm text-center quantity-input"
                                             value="{{ $item['quantity'] }}"
-                                            min="1" />
+                                            min="1"
+                                            aria-label="Product quantity" />
                                         <button
                                             type="button"
-                                            class="btn btn-sm btn-outline-secondary px-2 ms-2"
+                                            class="btn btn-sm btn-outline-secondary px-2 ms-2 quantity-btn"
                                             onclick="updateQuantity(this, 1)">
                                             <i class="fas fa-plus"></i>
                                         </button>
@@ -191,4 +192,6 @@
         }
     }
 </script>
-@endsection
+@push('scripts')
+<script src="{{ asset('assets/js/cart.js') }}"></script>
+@endpush
