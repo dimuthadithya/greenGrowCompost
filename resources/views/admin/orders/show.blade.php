@@ -12,6 +12,7 @@
     </div>
 </div>
 
+
 <div class="row">
     <div class="col-md-8">
         <div class="card mb-4">
@@ -80,15 +81,19 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <select name="status" class="form-select" onchange="this.form.submit()">
+                        <select name="status" class="form-select mb-2">
                             <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
                             <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
                             <option value="shipped" {{ $order->status == 'shipped' ? 'selected' : '' }}>Shipped</option>
                             <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                             <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                         </select>
+                        <button type="submit" class="btn btn-primary w-100">Update Status</button>
                     </div>
                 </form>
+                <div class="alert alert-info mb-0">
+                    <small>Current Status: <strong class="text-{{ $order->status_color }}">{{ ucfirst($order->status) }}</strong></small>
+                </div>
                 <div class="mt-3">
                     <strong>Order Date:</strong><br>
                     {{ $order->created_at->format('M d, Y H:i:s') }}
@@ -101,13 +106,17 @@
                 <h5 class="card-title mb-0">Customer Information</h5>
             </div>
             <div class="card-body">
-                <p class="mb-1"><strong>Name:</strong> {{ $order->customer->name }}</p>
-                <p class="mb-1"><strong>Email:</strong> {{ $order->customer->email }}</p>
+                @if($order->user)
+                <p class="mb-1"><strong>Name:</strong> {{ $order->user->name }}</p>
+                <p class="mb-1"><strong>Email:</strong> {{ $order->user->email }}</p>
                 <p class="mb-0">
-                    <a href="{{ route('admin.customers.show', $order->customer) }}" class="btn btn-sm btn-outline-primary mt-2">
+                    <a href="{{ route('admin.customers.show', $order->user_id) }}" class="btn btn-sm btn-outline-primary mt-2">
                         View Customer Profile
                     </a>
                 </p>
+                @else
+                <p class="text-muted mb-0">Customer information not available</p>
+                @endif
             </div>
         </div>
 

@@ -28,11 +28,23 @@ class Order extends Model
         'total' => 'decimal:2'
     ];
 
-    protected $appends = ['order_number'];
+    protected $appends = ['order_number', 'status_color'];
 
     public function getOrderNumberAttribute()
     {
         return 'GGC' . str_pad($this->id, 8, '0', STR_PAD_LEFT);
+    }
+
+    public function getStatusColorAttribute(): string
+    {
+        return match ($this->status) {
+            'pending' => 'warning',
+            'processing' => 'info',
+            'shipped' => 'primary',
+            'delivered' => 'success',
+            'cancelled' => 'danger',
+            default => 'secondary'
+        };
     }
 
     /**
@@ -57,6 +69,11 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function isDelivered(): bool
+    {
+        return $this->status === 'delivered';
     }
 
     /**
@@ -104,20 +121,5 @@ class Order extends Model
             $total += $item->quantity * $item->unit_price;
         }
         return $total;
-    }
-
-    /**
-     * Get the status color for display.
-     */
-    public function getStatusColorAttribute(): string
-    {
-        return match ($this->status) {
-            'pending' => 'warning',
-            'processing' => 'info',
-            'shipped' => 'primary',
-            'delivered' => 'success',
-            'cancelled' => 'danger',
-            default => 'secondary',
-        };
     }
 }

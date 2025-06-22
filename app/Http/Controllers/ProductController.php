@@ -25,7 +25,14 @@ class ProductController extends Controller
             ->take(3)
             ->get();
 
-        return view('welcome', compact('featuredProducts'));
+        // Get the latest 3 approved reviews with product and user information
+        $latestReviews = \App\Models\ProductReview::with(['product', 'user'])
+            ->where('is_approved', true)
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('welcome', compact('featuredProducts', 'latestReviews'));
     }
     public function show(Product $product)
     {

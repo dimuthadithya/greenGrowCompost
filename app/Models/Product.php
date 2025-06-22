@@ -45,7 +45,7 @@ class Product extends Model
     }
 
     /**
-     * Get the product reviews.
+     * Get the reviews for the product.
      */
     public function reviews(): HasMany
     {

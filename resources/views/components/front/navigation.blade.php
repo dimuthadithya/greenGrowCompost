@@ -35,6 +35,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('cart') ? 'active' : '' }}" href="{{ route('cart') }}">
+                        <i class="fas fa-shopping-cart me-1"></i>Cart
+                    </a>
+                </li>
+                <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
                         @csrf
                         <button type="submit" class="nav-link btn btn-link">
@@ -54,11 +59,6 @@
                     </a>
                 </li>
                 @endauth
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('cart') ? 'active' : '' }}" href="{{ route('cart') }}">
-                        <i class="fas fa-shopping-cart me-1"></i>Cart
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

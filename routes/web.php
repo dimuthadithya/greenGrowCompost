@@ -11,6 +11,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProductReviewController;
+
 use Illuminate\Support\Facades\Route;
 
 // Public Routes
@@ -40,6 +42,12 @@ Route::controller(CartController::class)->group(function () {
     Route::delete('/cart/clear', 'clear')->name('cart.clear');
 });
 
+// Checkout Routes
+Route::controller(CheckoutController::class)->group(function () {
+    Route::get('/checkout', 'index')->name('checkout');
+    Route::post('/checkout', 'process')->name('checkout.process');
+});
+
 Route::get('/order/{id}', function ($id) {
     $order = \App\Models\Order::with(['items.product', 'address'])->findOrFail($id);
     return view('orderdetails', ['order' => $order]);
@@ -64,6 +72,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/addresses/{address}/default', [AddressController::class, 'setDefault'])->name('addresses.default');
 });
 
+// Product Review Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/orders/{order}/reviews', [ProductReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/orders/{order}/reviews', [ProductReviewController::class, 'store'])->name('reviews.store');
+});
+
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -79,16 +93,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
 
     // Contact Messages Management
     Route::resource('contact', ContactController::class)->only(['index', 'show', 'destroy']);
+
+    // Reviews Management
+    Route::get('reviews', [\App\Http\Controllers\Admin\ReviewController::class, 'index'])->name('reviews.index');
+    Route::post('reviews/{review}/toggle', [\App\Http\Controllers\Admin\ReviewController::class, 'toggleApproval'])->name('reviews.toggle');
+    Route::delete('reviews/{review}', [\App\Http\Controllers\Admin\ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
-// Checkout Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
-    Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
-    Route::get('/order/confirmation/{order}', function ($order) {
-        return view('order.confirmation', compact('order'));
-    })->name('order.confirmation');
-});
 
 // Order Confirmation Route
 Route::get('/order/confirmation/{order}', function ($order) {

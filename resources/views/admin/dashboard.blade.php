@@ -71,7 +71,7 @@
                 <td>#{{ $order->order_number }}</td>
                 <td>{{ optional($order->user)->name ?? 'N/A' }}</td>
                 <td>{{ $order->items_summary }}</td>
-                <td>${{ number_format($order->total_amount ?? 0, 2) }}</td>
+                <td>${{ number_format($order->total ?? 0, 2) }}</td>
                 <td><span class="badge bg-{{ $order->status_color }}">{{ $order->status }}</span></td>
                 <td>
                     <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-sm btn-outline-primary">View</a>

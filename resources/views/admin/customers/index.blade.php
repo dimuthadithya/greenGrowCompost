@@ -42,7 +42,4 @@
     </table>
 </div>
 
-<div class="d-flex justify-content-center mt-4">
-    {{ $customers->links() }}
-</div>
 @endsection
