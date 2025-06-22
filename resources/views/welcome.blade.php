@@ -88,7 +88,7 @@
     <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="https://via.placeholder.com/600x400?text=About+Us" class="img-fluid rounded shadow" alt="About GreenGrow">
+                <img src="{{ asset('assets/images/about.jpg') }}" class="img-fluid rounded shadow" alt="About GreenGrow">
             </div>
             <div class="col-lg-6">
                 <h2 class="display-5 text-success mb-4">About GreenGrow</h2>
