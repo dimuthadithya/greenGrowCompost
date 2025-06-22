@@ -1,61 +1,206 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# GreenGrow Compost - Organic Fertilizer E-Commerce Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+GreenGrow Compost is a modern e-commerce platform specializing in organic fertilizers and composting products. Built with Laravel and featuring a responsive design, it provides a seamless shopping experience for customers looking for sustainable gardening solutions.
 
-## About Laravel
+![Home Page](public/assets/images/readme/home.png)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Customer Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   **Product Browsing & Search**
 
-## Learning Laravel
+    -   Browse through a wide range of organic fertilizers
+    -   Filter products by categories
+    -   Search functionality for quick product discovery
+    -   Detailed product information with images
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    ![Product Details](public/assets/images/readme/productDetails.png)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   **Shopping Cart & Checkout**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    -   Easy-to-use shopping cart
+    -   Real-time price calculations
+    -   Multiple payment options
+    -   Secure checkout process
 
-## Laravel Sponsors
+    ![Shopping Cart](public/assets/images/readme/cart.png)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+-   **User Account Management**
 
-### Premium Partners
+    -   Personal profile customization
+    -   Multiple shipping addresses
+    -   Order history tracking
+    -   Product reviews and ratings
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+    ![Profile](public/assets/images/readme/profile.png)
+
+-   **Order Management**
+
+    -   Real-time order tracking
+    -   Order history with detailed views
+    -   Digital invoices
+    -   Email notifications
+
+    ![Order History](public/assets/images/readme/orderHistory.png)
+
+### Admin Features
+
+-   **Dashboard Analytics**
+
+    -   Sales overview and statistics
+    -   Recent orders monitoring
+    -   Stock level alerts
+    -   Customer activity tracking
+
+    ![Admin Dashboard](public/assets/images/readme/adminDashboard.png)
+
+-   **Product Management**
+
+    -   Product CRUD operations
+    -   Category management
+    -   Stock control
+    -   Price management
+
+    ![Product Management](public/assets/images/readme/adminProducts.png)
+
+-   **Order Processing**
+
+    -   Order status management
+    -   Customer communication
+    -   Invoice generation
+    -   Shipping management
+
+    ![Order Management](public/assets/images/readme/adminOrders.png)
+
+## Technology Stack
+
+-   **Backend Framework:** Laravel 10
+-   **Frontend:**
+    -   Blade Templates
+    -   TailwindCSS
+    -   Alpine.js
+-   **Database:** MySQL
+-   **Authentication:** Laravel Breeze
+-   **File Storage:** Laravel Storage
+-   **Payment Integration:** Stripe (ready for integration)
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone [repository-url]
+cd greenGrowCompost
+```
+
+2. Install PHP dependencies:
+
+```bash
+composer install
+```
+
+3. Install NPM dependencies:
+
+```bash
+npm install
+```
+
+4. Setup environment file:
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+5. Configure database in `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=greenGrowCompost
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
+
+6. Run migrations and seeders:
+
+```bash
+php artisan migrate --seed
+```
+
+7. Create storage link:
+
+```bash
+php artisan storage:link
+```
+
+8. Build assets:
+
+```bash
+npm run build
+```
+
+9. Start the server:
+
+```bash
+php artisan serve
+```
+
+## Usage
+
+### Customer Portal
+
+-   Visit `http://localhost:8000`
+-   Register a new account or login
+-   Browse products and add to cart
+-   Complete checkout process
+
+### Admin Dashboard
+
+-   Access admin panel at `http://localhost:8000/admin`
+-   Default admin credentials:
+    -   Email: admin@example.com
+    -   Password: password
+-   Manage products, orders, and customers
+
+## Database Structure
+
+The system includes the following main models:
+
+-   Users (customers and admins)
+-   Products
+-   Categories
+-   Orders
+-   Order Items
+-   Addresses
+-   Reviews
+
+## Security Features
+
+-   CSRF Protection
+-   SQL Injection Prevention
+-   XSS Protection
+-   Secure Password Hashing
+-   Role-based Access Control
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+For support, email support@greengrow.lk or create an issue in the repository.
+
+---
+
+Built with ❤️ by GreenGrow Team

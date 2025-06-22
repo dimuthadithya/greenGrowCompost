@@ -34,26 +34,28 @@
                             @foreach($order->items as $item)
                             <tr>
                                 <td>{{ optional($item->product)->name ?? 'Product Removed' }}</td>
-                                <td>${{ number_format($item->price ?? 0, 2) }}</td>
+                                <td>LKR {{ number_format($item->price ?? 0, 2) }}</td>
                                 <td>{{ $item->quantity ?? 0 }}</td>
-                                <td class="text-end">${{ number_format(($item->price ?? 0) * ($item->quantity ?? 0), 2) }}</td>
+                                <td class="text-end">LKR {{ number_format(($item->price ?? 0) * ($item->quantity ?? 0), 2) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <td colspan="3" class="text-end"><strong>Subtotal:</strong></td>
-                                <td class="text-end">${{ number_format($order->items->sum('total'), 2) }}</td>
+                                <td class="text-end">LKR {{ number_format($order->subtotal, 2) }}</td>
                             </tr>
-                            @if($order->shipping_cost)
                             <tr>
                                 <td colspan="3" class="text-end"><strong>Shipping:</strong></td>
-                                <td class="text-end">${{ number_format($order->shipping_cost, 2) }}</td>
+                                <td class="text-end">LKR {{ number_format($order->shipping, 2) }}</td>
                             </tr>
-                            @endif
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Tax:</strong></td>
+                                <td class="text-end">LKR {{ number_format($order->tax, 2) }}</td>
+                            </tr>
                             <tr>
                                 <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                                <td class="text-end"><strong>${{ number_format($order->total, 2) }}</strong></td>
+                                <td class="text-end"><strong>LKR {{ number_format($order->total, 2) }}</strong></td>
                             </tr>
                         </tfoot>
                     </table>

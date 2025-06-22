@@ -120,7 +120,7 @@
                     @foreach($products as $product)
                     <div class="col-md-6 col-lg-4">
                         <div class="card h-100 border-0 shadow-sm product-card">
-                            <img src="{{ $product->image_url ?? 'https://via.placeholder.com/400x300?text=' . urlencode($product->name) }}"
+                            <img src="{{ asset('storage/' . $product->image) ?? '' . urlencode($product->name) }}"
                                 class="card-img-top"
                                 alt="{{ $product->name }}">
                             <div class="card-body p-4">
@@ -128,7 +128,7 @@
                                 <p class="text-muted small mb-2">{{ $product->category->name }}</p>
                                 <p class="text-muted mb-3">{{ Str::limit($product->description, 100) }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="h5 mb-0">${{ number_format($product->price, 2) }}</span>
+                                    <span class="h5 mb-0">LKR {{ number_format($product->price, 2) }}</span>
                                     <a href="{{ route('products.show', $product) }}" class="btn btn-outline-success">View Details</a>
                                 </div>
                             </div>

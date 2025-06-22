@@ -24,7 +24,7 @@
         <div class="card text-white bg-success">
             <div class="card-body">
                 <h5 class="card-title">Revenue</h5>
-                <p class="card-text h2">${{ number_format($totalRevenue, 2) }}</p>
+                <p class="card-text h2">LKR {{ number_format($totalRevenue, 2) }}</p>
                 <p class="card-text">
                     <small>{{ $revenueIncrease }}% increase from last month</small>
                 </p>
@@ -71,7 +71,7 @@
                 <td>#{{ $order->order_number }}</td>
                 <td>{{ optional($order->user)->name ?? 'N/A' }}</td>
                 <td>{{ $order->items_summary }}</td>
-                <td>${{ number_format($order->total ?? 0, 2) }}</td>
+                <td>LKR {{ number_format($order->total ?? 0, 2) }}</td>
                 <td><span class="badge bg-{{ $order->status_color }}">{{ $order->status }}</span></td>
                 <td>
                     <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-sm btn-outline-primary">View</a>
@@ -105,7 +105,7 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ optional($product->category)->name ?? 'Uncategorized' }}</td>
                 <td><span class="text-{{ $product->stock_quantity <= 5 ? 'danger' : 'warning' }}">{{ $product->stock_quantity }} units</span></td>
-                <td>${{ number_format($product->price, 2) }}</td>
+                <td>LKR {{ number_format($product->price, 2) }}</td>
                 <td>
                     <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-outline-primary">
                         Restock
