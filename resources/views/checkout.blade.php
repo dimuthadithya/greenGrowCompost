@@ -70,11 +70,11 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label for="first_name" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ old('first_name', 'John') }}" required>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="last_name" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ old('last_name', 'Doe') }}" required>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email</label>
@@ -82,33 +82,33 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="address" class="form-label">Street Address</label>
-                                    <input type="text" class="form-control" id="address" name="address" value="{{ old('address', '123 Test Street') }}" required>
+                                    <input type="text" class="form-control" id="address" name="address" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city" value="{{ old('city', 'Test City') }}" required>
+                                    <input type="text" class="form-control" id="city" name="city" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="postal_code" class="form-label">Postal Code</label>
-                                    <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{ old('postal_code', '12345') }}" required>
+                                    <input type="text" class="form-control" id="postal_code" name="postal_code" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="state" class="form-label">State</label>
-                                    <input type="text" class="form-control" id="state" name="state" value="{{ old('state', 'Test State') }}" required>
+                                    <input type="text" class="form-control" id="state" name="state" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="country" class="form-label">Country</label>
                                     <select class="form-select" id="country" name="country" required>
                                         <option value="">Choose...</option>
-                                        <option value="IN" selected>India</option>
-                                        <option value="LK">Sri Lanka</option>
+                                        <option value="IN">India</option>
+                                        <option value="LK" selected>Sri Lanka</option>
                                         <option value="NP">Nepal</option>
                                         <option value="BD">Bangladesh</option>
                                     </select>
                                 </div>
                                 <div class="col-12">
                                     <label for="phone" class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone" value="{{ old('phone', '1234567890') }}" required>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
                                 </div>
                             </div>
                         </div>
@@ -125,7 +125,6 @@
                                         name="card_number"
                                         placeholder="0000 0000 0000 0000"
                                         maxlength="19"
-                                        value="4242 4242 4242 4242"
                                         required>
                                     <div class="invalid-feedback">
                                         Please enter a valid 16-digit card number
@@ -139,7 +138,6 @@
                                         name="expiry_date"
                                         placeholder="MM/YY"
                                         maxlength="5"
-                                        value="12/25"
                                         required>
                                     <div class="invalid-feedback">
                                         Please enter a valid expiry date (MM/YY)
@@ -150,7 +148,6 @@
                                     <input type="text"
                                         class="form-control card-input"
                                         id="cvv"
-                                        value="123"
                                         name="cvv"
                                         placeholder="000"
                                         maxlength="3"
@@ -166,7 +163,6 @@
                                         id="card_holder"
                                         name="card_holder"
                                         placeholder="Name on card"
-                                        value="John Doe"
                                         required>
                                     <div class="invalid-feedback">
                                         Please enter the card holder's name
