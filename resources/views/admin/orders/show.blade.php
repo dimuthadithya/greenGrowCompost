@@ -34,7 +34,7 @@
                             @foreach($order->items as $item)
                             <tr>
                                 <td>{{ optional($item->product)->name ?? 'Product Removed' }}</td>
-                                <td>${{ number_format($item->price ?? 0, 2) }}</td>
+                                <td>LKR {{ number_format($item->price ?? 0, 2) }}</td>
                                 <td>{{ $item->quantity ?? 0 }}</td>
                                 <td class="text-end">${{ number_format(($item->price ?? 0) * ($item->quantity ?? 0), 2) }}</td>
                             </tr>
