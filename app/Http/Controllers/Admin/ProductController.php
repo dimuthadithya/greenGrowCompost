@@ -48,23 +48,27 @@ class ProductController extends Controller
             'weight.min' => 'The weight cannot be negative',
             'unit.required' => 'Please select a unit of measurement',
             'unit.in' => 'Please select a valid unit (kg, g, lb, or oz)',
-            'category_id.required' => 'Please select a product category',
-            'category_id.exists' => 'The selected category is invalid',
-            'image.image' => 'The file must be an image',
-            'image.max' => 'The image size cannot exceed 2MB'
+            'is_featured.boolean' => 'The featured status must be true or false',
+            'is_active.boolean' => 'The active status must be true or false',
         ];
 
+        // Convert checkbox values to boolean
+        $request->merge([
+            'is_featured' => $request->boolean('is_featured'),
+            'is_active' => $request->boolean('is_active'),
+        ]);
+
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'name' => 'required|max:255',
+            'description' => 'required',
             'price' => 'required|numeric|min:0',
             'stock_quantity' => 'required|integer|min:0',
             'weight' => 'required|numeric|min:0',
-            'unit' => 'required|string|in:kg,g,lb,oz',
+            'unit' => 'required|in:kg,g,lb,oz',
             'category_id' => 'required|exists:product_categories,id',
-            'image' => 'nullable|image|max:2048',
             'is_featured' => 'boolean',
-            'is_active' => 'boolean'
+            'is_active' => 'boolean',
+            'image' => 'nullable|image|max:2048'
         ], $messages);
 
         try {

@@ -134,7 +134,7 @@
             @forelse($featuredProducts as $product)
             <div class="col-md-6 col-lg-4">
                 <div class="card h-100 border-0 shadow-sm product-card">
-                    <img src="{{ $product->image_url ?? 'https://via.placeholder.com/400x300?text=' . urlencode($product->name) }}"
+                    <img src="{{ asset('storage/' . $product->image) ?? 'https://via.placeholder.com/400x300?text=' . urlencode($product->name) }}"
                         class="card-img-top"
                         alt="{{ $product->name }}">
                     <div class="card-body p-4">
