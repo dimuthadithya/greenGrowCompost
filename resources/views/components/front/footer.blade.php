@@ -42,8 +42,8 @@
             <div class="col-lg-2">
                 <h5 class="mb-4 text-success">Contact</h5>
                 <ul class="list-unstyled footer-links">
-                    <li class="mb-3 text-light"><i class="fas fa-map-marker-alt me-2 text-success"></i>123 Green Street</li>
-                    <li class="mb-3 text-light"><i class="fas fa-phone me-2 text-success"></i>(555) 123-4567</li>
+                    <li class="mb-3 text-light"><i class="fas fa-map-marker-alt me-2 text-success"></i>123 Green Street,Sri Lanka</li>
+                    <li class="mb-3 text-light"><i class="fas fa-phone me-2 text-success"></i>077717277</li>
                     <li class="mb-3 text-light"><i class="fas fa-envelope me-2 text-success"></i>info@greengrow.com</li>
                 </ul>
             </div>
