@@ -294,14 +294,15 @@
         </div>
     </div>
 </section>
-<!-- Testimonials -->
+<!-- Customer Reviews -->
 <section class="py-5 bg-light">
     <div class="container py-5">
         <h2 class="display-5 text-success text-center mb-5">
             What Our Customers Say
         </h2>
         <div class="row g-4">
-            <!-- Testimonial 1 -->
+            @forelse ($latestReviews as $review)
+            <!-- Review Card -->
             <div class="col-md-4">
                 <div class="testimonial-card">
                     <div class="d-flex align-items-center mb-4">
@@ -309,74 +310,35 @@
                             <i class="fas fa-user"></i>
                         </div>
                         <div class="ms-3">
-                            <h4 class="h5 mb-1">Nimal Perera</h4>
+                            <h4 class="h5 mb-1">{{ $review->user->name }}</h4>
                             <div class="star-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <=$review->rating)
+                                    <i class="fas fa-star"></i>
+                                    @elseif ($i - 0.5 <= $review->rating)
+                                        <i class="fas fa-star-half-alt"></i>
+                                        @else
+                                        <i class="far fa-star"></i>
+                                        @endif
+                                        @endfor
                             </div>
+                            <small class="text-muted">{{ $review->product->name }}</small>
                         </div>
                     </div>
                     <p class="text-muted mb-0">
-                        "My vegetable garden has never been more productive! The compost
-                        is rich and full of nutrients. Highly recommended!"
+                        "{{ $review->comment }}"
                     </p>
+                    <small class="text-muted d-block mt-2">
+                        {{ $review->created_at->diffForHumans() }}
+                    </small>
                 </div>
             </div>
-
-            <!-- Testimonial 2 -->
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="testimonial-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="ms-3">
-                            <h4 class="h5 mb-1">Kamala Fernando</h4>
-                            <div class="star-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted mb-0">
-                        "I've been using GreenGrow compost for my flower garden and the
-                        results are amazing. The flowers are more vibrant and last
-                        longer."
-                    </p>
-                </div>
+            @empty
+            <!-- If no reviews yet -->
+            <div class="col-12 text-center">
+                <p class="text-muted">No customer reviews yet. Be the first to share your experience!</p>
             </div>
-
-            <!-- Testimonial 3 -->
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="testimonial-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="ms-3">
-                            <h4 class="h5 mb-1">Sunil Rathnayake</h4>
-                            <div class="star-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted mb-0">
-                        "As a small-scale farmer, I've seen a 30% increase in my yield
-                        since switching to GreenGrow compost. The delivery was prompt
-                        too!"
-                    </p>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </section>
